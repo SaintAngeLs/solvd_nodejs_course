@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 
 ## Project Overview
-![Project Screenshot](https://drive.google.com/file/d/12vl7U_zRVVWADZbO8rAs1nlDUFZVE_dP/view?usp=drive_link)
+![Screenshot of the project](./image_to_readme.png)
 
 ## Getting Started
 
