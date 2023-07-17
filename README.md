@@ -15,8 +15,8 @@ docker-compose up --build --force-recreate
 npm run dev
 # or  (the project was not deployed with the yarn pm :( )
 yarn dev
-# or (the project was not deployed with the yarn pm)
-pnpm dev
+# To run the development tests
+npx jest
 
 ```
 
