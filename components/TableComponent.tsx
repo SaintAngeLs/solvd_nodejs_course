@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { runTests } from '../tasks/task1_test';
+import { runTests } from '../tasks/task1/test/task1_test';
 
 const tasks = [
   { number: 1, name: 'Task 1', assignmentDate: '2023-07-01', deadline: '2023-07-15', solution: 'Solution 1',  notes: 'Ask about the tridiagonal systems Ax=b',},
