@@ -1,9 +1,12 @@
+import { TestCase } from "./TestInterface";
+
 /**
  * @brief Generates random test cases for mathematical operations.
  * @returns {Object[]} - An array of random test cases.
  */
-export function generateRandomTests() {
-    const randomTests = [];
+export function generateRandomTests(): TestCase[] {
+
+    const randomTests: TestCase[] = [];
   
     for (let i = 0; i < 50; i++) 
     {
@@ -27,7 +30,7 @@ export function generateRandomTests() {
  * @brief Generates a huge number with a random number of digits.
  * @returns {string} - The generated huge number as a string.
  */
-function generateHugeNumber() {
+function generateHugeNumber(): string {
   const exponent = getRandomInt(300) + 1;
   const digits = Array.from({ length: exponent }, () => getRandomInt(10));
 
@@ -41,7 +44,7 @@ function generateHugeNumber() {
  * @param {string} num2 - The second number to add.
  * @returns {string} - The result of addition as a string.
  */
-function performAddition(num1, num2) {
+function performAddition(num1: string, num2: string): string  {
   return addBigInt(num1, num2).toString();
 }
   
@@ -52,7 +55,7 @@ function performAddition(num1, num2) {
  * @param {string} num2 - The number to subtract.
  * @returns {string} - The result of subtraction as a string.
  */
-function performSubtraction(num1, num2) {
+function performSubtraction(num1: string, num2: string): string  {
   return subtractBigInt(num1, num2).toString();
 }
 
@@ -63,7 +66,7 @@ function performSubtraction(num1, num2) {
  * @param {string} num2 - The second number to multiply.
  * @returns {string} - The result of multiplication as a string.
  */
-function performMultiplication(num1, num2) {
+function performMultiplication(num1: string, num2: string): string {
   return multiplyBigInt(num1, num2).toString();
 }
 
@@ -74,7 +77,7 @@ function performMultiplication(num1, num2) {
  * @param {string} num2 - The divisor.
  * @returns {string} - The result of division as a string.
  */
-function performDivision(num1, num2) {
+function performDivision(num1: string, num2: string): string {
   return divideBigInt(num1, num2).toString();
 }
 
@@ -85,7 +88,7 @@ function performDivision(num1, num2) {
  * @param {string} b - The second number to add.
  * @returns {BigInt} - The sum of the two numbers as a BigInt.
  */
-function addBigInt(a, b) {
+function addBigInt(a:string, b: string) : bigint  {
   const num1 = BigInt(a);
   const num2 = BigInt(b);
 
@@ -99,7 +102,7 @@ function addBigInt(a, b) {
  * @param {string} b - The number to subtract.
  * @returns {BigInt} - The difference of the two numbers as a BigInt.
  */
-function subtractBigInt(a, b) {
+function subtractBigInt(a: string, b: string) : bigint {
   const num1 = BigInt(a);
   const num2 = BigInt(b);
 
@@ -113,7 +116,7 @@ function subtractBigInt(a, b) {
  * @param {string} b - The second number to multiply.
  * @returns {BigInt} - The product of the two numbers as a BigInt.
  */
-function multiplyBigInt(a, b) {
+function multiplyBigInt(a: string, b: string): bigint {
   const num1 = BigInt(a);
   const num2 = BigInt(b);
 
@@ -127,7 +130,7 @@ function multiplyBigInt(a, b) {
  * @param {string} b - The divisor.
  * @returns {BigInt} - The result of division as a BigInt.
  */
-function divideBigInt(a, b) {
+function divideBigInt(a: string, b: string): bigint {
   const num1 = BigInt(a);
   const num2 = BigInt(b);
 
@@ -140,6 +143,6 @@ function divideBigInt(a, b) {
  * @param {number} max - The upper bound (exclusive) for the random integer.
  * @returns {number} - The generated random integer.
  */
-function getRandomInt(max) {
+function getRandomInt(max: number): number  {
   return Math.floor(Math.random() * max);
 }

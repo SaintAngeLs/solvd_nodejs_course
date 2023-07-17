@@ -1,4 +1,4 @@
-export function measureExecutionTime(func) 
+export function measureExecutionTime(func: () => any) 
 {
     const start = performance.now();
     const result = func();
@@ -7,7 +7,7 @@ export function measureExecutionTime(func)
     return { result, executionTime };
   }
 
-export function calculateErrorPercentage(actual, expected) 
+export function calculateErrorPercentage(actual: string, expected: string) 
 {
   const actualBigInt = BigInt(actual);
   const expectedBigInt = BigInt(expected);
@@ -16,17 +16,21 @@ export function calculateErrorPercentage(actual, expected)
 
 
   // instead of 0.00...00 using the literal in the BigInt
-  if (expectedBigInt === 0n) {
-    if (actualBigInt === 0n) {
+  if (expectedBigInt.toString() === "0") 
+  {
+    if (actualBigInt.toString() === "0") 
+    {
       // Both are == to 0, return 0 as error p.
       return "0.000";
-    } else {
+    } 
+    else 
+    {
       // expectedBigInt is 0
       return "Error: Division by zero";
     }
   }
 
-  const errorPercentage = (absoluteError / expectedBigInt) * 100n;
+  const errorPercentage = (absoluteError / expectedBigInt) * BigInt(100);
 
   return Number(errorPercentage).toFixed(3);
 }
