@@ -12,6 +12,9 @@ describe('addValues', () => {
     test('should throw an error for invalid types', () => {
         expect(() => dataTransfomrationModule.addValues(true, 42)).toThrow('Addition is not possible the types provided :(');
     });
+    test('should concatenate the boolean blue string', () => {
+        expect(() => dataTransfomrationModule.addValues(true, 'World')).toThrow('Addition is not possible the types provided :(');
+    });
 });
 
 describe('stringifyValue', () => {
