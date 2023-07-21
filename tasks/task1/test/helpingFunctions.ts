@@ -5,7 +5,7 @@ export function measureExecutionTime(func: () => any)
     const end = performance.now();
     const executionTime = end - start;
     return { result, executionTime };
-  }
+}
 
 export function calculateErrorPercentage(actual: string, expected: string) 
 {

@@ -8,7 +8,7 @@ import { TestCase } from './TestInterface';
 
 
 
-export function runTests(): any[] {
+export function runTestsTask1(): any[] {
 
     const combinedTestCases: TestCase[] = [...testCases, ...generateRandomTests()];
 
@@ -41,21 +41,21 @@ export function runTests(): any[] {
     return {
         input,
         addition: additionResult.toString(),
-            expectedAddition: expectedAddition.toString(),
-            additionError,
-            additionExecutionTime: additionTest.executionTime,
-            subtraction: subtractionResult.toString(),
-            expectedSubtraction: expectedSubtraction.toString(),
-            subtractionError,
-            subtractionExecutionTime: subtractionTest.executionTime,
-            multiplication: multiplicationResult.toString(),
-            expectedMultiplication: expectedMultiplication.toString(),
-            multiplicationError,
-            multiplicationExecutionTime: multiplicationTest.executionTime,
-            division: divisionResult.toString(),
-            expectedDivision: expectedDivision.toString(),
-            divisionError,
-            divisionExecutionTime: divisionTest.executionTime,
+        expectedAddition: expectedAddition.toString(),
+        additionError,
+        additionExecutionTime: additionTest.executionTime,
+        subtraction: subtractionResult.toString(),
+        expectedSubtraction: expectedSubtraction.toString(),
+        subtractionError,
+        subtractionExecutionTime: subtractionTest.executionTime,
+        multiplication: multiplicationResult.toString(),
+        expectedMultiplication: expectedMultiplication.toString(),
+        multiplicationError,
+        multiplicationExecutionTime: multiplicationTest.executionTime,
+        division: divisionResult.toString(),
+        expectedDivision: expectedDivision.toString(),
+        divisionError,
+        divisionExecutionTime: divisionTest.executionTime,
     };
   });
 

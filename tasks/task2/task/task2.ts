@@ -148,7 +148,7 @@ namespace dataTransfomrationModule
             case "number":
                 return dataTransfomrationModule.convertToNumber(value);
             default:
-                throw new Error('Invalid type specified for coercion :(');
+                throw new Error("Invalid type specified for coercion :(");
         }
     }
     /**
