@@ -75,7 +75,7 @@ export const convertToNumberTestCases: TestCase[] = [
     {
         testName: 'Convert object to number',
         input: { key: 'value' },
-        expectedOutput: 1,
+        expectedOutput: new Error("Conversion to number not possible for the type provided :("),
     },
 ];
 

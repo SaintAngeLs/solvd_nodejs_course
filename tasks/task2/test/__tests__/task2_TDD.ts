@@ -61,9 +61,9 @@ describe('convertToNumber', () => {
         expect(dataTransfomrationModule.convertToNumber(false)).toBe(0);
     });
 
-    test('should convert object to number correctly', () => {
+    test('should not convert the object to the number(do not return the size of the object)', () => {
     const obj = { name: 'John', age: 25 };
-        expect(dataTransfomrationModule.convertToNumber(obj)).toBe(2);
+        expect(() => dataTransfomrationModule.convertToNumber(obj)).toThrow('Conversion to number not possible for the type provided :(');
     });
 
     test('should throw an error for invalid types', () => {

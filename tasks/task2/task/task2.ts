@@ -90,7 +90,7 @@ namespace dataTransfomrationModule
      * @returns The converted number value.
      * @throws If the conversion is not possible for the provided value.
      */
-    export function convertToNumber(value: any): number
+    export function convertToNumber(value: any): any
     {
         if (typeof value === 'string') 
         {
@@ -105,14 +105,7 @@ namespace dataTransfomrationModule
         {
             return value ? 1 : 0;
         } 
-        else if (typeof value === 'object' && value !== null) 
-        {
-            if(Array.isArray(value))
-            {
-                throw new Error("Conversion to number not possible for the type provided :(");
-            }
-            return Object.keys(value).length;
-        }
+        
         throw new Error("Conversion to number not possible for the type provided :(");
     }
     /**
@@ -122,7 +115,7 @@ namespace dataTransfomrationModule
      * @returns The coerced value.
      * @throws If the coercion is not possible for the provided type.
      */
-    export function coerceToType(value: any, type: "string" | "boolean" | "number"): any
+    export function coerceToType(value: any, type: "string" | "boolean" | "number"):  string | boolean | number
     {
         switch (type) 
         {
