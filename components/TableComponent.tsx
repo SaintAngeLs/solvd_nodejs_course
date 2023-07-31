@@ -1,5 +1,6 @@
 import { runTestsTask1 } from '@/tasks/task1/test/task1_test';
 import { runTestsTask2 } from '@/tasks/task2/test/task2_test';
+import { runTestsTask3 } from '@/tasks/task3/test/task3_test';
 import React, { useState } from 'react';
 
 
@@ -18,6 +19,13 @@ const tasks = [
     deadline: '2023-07-20', 
     solution: 'Solution 2' 
   },
+  { 
+    number: 3, 
+    name: '{}', 
+    assignmentDate: '2023-07-05', 
+    deadline: '2023-07-20', 
+    solution: 'Solution 3' 
+  },
 
   // TASK_3, ..., TASK_N
   
@@ -26,6 +34,7 @@ const tasks = [
 const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, toggleNotesVisibility }) => {
   const [testResults1, setTestResults1] = useState([]);
   const [testResults2, setTestResults2] = useState([]);
+  const [testResults3, setTestResults3] = useState([]);
 
 
   const runTestsAndStoreResults = (taskNumber) => {
@@ -36,6 +45,9 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
     } else if (taskNumber === 2) {
       testResults = runTestsTask2();
       setTestResults2(testResults);
+    } else if (taskNumber === 3){
+      testResults = runTestsTask3();
+      setTestResults3(testResults);
     }
   };
 
@@ -171,6 +183,40 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
                    </div>
                    <ul className="test-results-list text-left text-sm">
                      {testResults2.map((result, index) => {
+                       const isResultErrorFree = result.testPassed;
+                       console.log("isResultErrorFree", isResultErrorFree)
+                       return (
+                         <li
+                           key={index}
+                           className={`border-b border-gray-300 pb-2 mb-2 ${isResultErrorFree ? 'bg-green-200' : 'bg-red-200'}`}
+                         >
+                           <strong>Test Name:</strong> {result.testName}
+                           <br />
+                           <strong>Input:</strong> {JSON.stringify(result.input)}
+                           <br />
+                           <strong>Expected Output:</strong> {JSON.stringify(result.expectedOutput)}
+                           <br />
+                           <strong>Received Output:</strong> {JSON.stringify(result.receivedOutput)}
+                           <br />
+                           <strong>Test Passed:</strong> {result.testPassed ? 'Passed' : 'Failed'}
+                           <br />
+                           <strong>Execution Time:</strong> {result.executionTime} ms
+                         </li>
+                       );
+                     })}
+                   </ul>
+                 </td>
+               </tr>
+              )}
+
+              {task.number === 3 && testResults3.length > 0 && (
+                 <tr>
+                 <td colSpan={6}>
+                   <div>
+                     <strong>Test Results for Task {task.number}:</strong>
+                   </div>
+                   <ul className="test-results-list text-left text-sm">
+                     {testResults3.map((result, index) => {
                        const isResultErrorFree = result.testPassed;
                        console.log("isResultErrorFree", isResultErrorFree)
                        return (
