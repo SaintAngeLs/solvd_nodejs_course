@@ -81,11 +81,11 @@ describe("Task 3 tests", () => {
     });
 
     test("calculateFactorial", () => {
-        expect(calculateFactorial(5)).toBe(120);
+        expect(calculateFactorial(5)).toBe("120");
     });
 
     test("power", () => {
-        expect(power(2, 3)).toBe(8);
+        expect(power(2, 3)).toBe("8");
     });
 
     test("lazyMap", () => {
@@ -113,7 +113,7 @@ describe("Task 3 tests", () => {
                 result.push(item.value);
             }
         }
-        expect(result).toEqual([0, 1, 1, 2]);
+        expect(result).toEqual(["0", "1", "1", "2"]);
     });
 });
 
@@ -151,7 +151,7 @@ describe("Task 3 tests - USER TESTS", () => {
     createCounterTestCases.forEach(({testName, input, expectedOutput}) => {
         test(testName, () => {
             const counter = createCounter();
-            const result = Array(input[0]).fill(0).map((_, index) => counter());
+            const result = Array(input).fill(0).map((_, index) => counter());
             expect(result).toEqual(expectedOutput);
         });
     });

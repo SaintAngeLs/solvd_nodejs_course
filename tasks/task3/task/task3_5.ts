@@ -1,3 +1,5 @@
+import { add, multiply } from "../../task1/task/task1_newVersion";
+
 /**
  * Interf for the iterable object returning in both methods
  */
@@ -31,13 +33,13 @@ export function lazyMap<T, U>(array: T[], mapFunc: (value: T) => U, doneValue: n
 /**
  * @note Create a lazy generator function called `fibonacciGenerator` that generates Fibonacci numbers one at a time using lazy evaluation.
  */
-export function fibonacciGenerator(): { next: () => IteratorResult<number> } {
-    let a = 0, b = 1;
-
+export function fibonacciGenerator(): { next: () => IteratorResult<string> } 
+{
+    let a = "0", b = "1";
     return {
         next: () => {
             const result = { done: false, value: a };
-            [a, b] = [b, a + b];
+            [a, b] = [b, add(a + " " + b)];
             return result;
         }
     };

@@ -31,6 +31,14 @@ const tasks = [
   
 ];
 
+function replacer(key, value) {
+  if (typeof value === 'bigint') {
+    return value.toString(); // append "n" to indicate it's a BigInt
+  } else {
+    return value;
+  }
+}
+
 const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, toggleNotesVisibility }) => {
   const [testResults1, setTestResults1] = useState([]);
   const [testResults2, setTestResults2] = useState([]);
@@ -228,9 +236,9 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
                            <br />
                            <strong>Input:</strong> {JSON.stringify(result.input)}
                            <br />
-                           <strong>Expected Output:</strong> {JSON.stringify(result.expectedOutput)}
+                           <strong>Expected Output:</strong> {JSON.stringify(result.expectedOutput, replacer)}
                            <br />
-                           <strong>Received Output:</strong> {JSON.stringify(result.receivedOutput)}
+                           <strong>Received Output:</strong> {JSON.stringify(result.receivedOutput, replacer)}
                            <br />
                            <strong>Test Passed:</strong> {result.testPassed ? 'Passed' : 'Failed'}
                            <br />

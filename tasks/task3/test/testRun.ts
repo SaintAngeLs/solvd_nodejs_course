@@ -43,7 +43,7 @@ export function runTestCases(functionName: string, testCases: TestCase[]): TestR
                 receivedOutput = repeatedFunction();
                 break;
             case 'calculateFactorial':
-                receivedOutput = calculateFactorial(input[0] as number, input[1] as number);
+                receivedOutput = calculateFactorial(input[0] as number, input[1] as string);
                 break;
             case 'power':
                 receivedOutput = power(input[0] as number, input[1] as number);
@@ -61,17 +61,20 @@ export function runTestCases(functionName: string, testCases: TestCase[]): TestR
                 }
                 receivedOutput = result;
                 break;
-            case 'fibonacciGenerator':
-                const fibGen = fibonacciGenerator();
-                const fibNumbers: number[] = [];
-                for (let i = 0; i < (input as number); i++) {
-                    fibNumbers.push(fibGen.next().value as number);
-                }
-                receivedOutput = fibNumbers;
-                break;
+                case 'fibonacciGenerator':
+                    const fibGen = fibonacciGenerator();
+                    const fibNumbers: string[] = [];
+                    for (let i = 0; i < Number(input); i++) 
+                    {
+                        fibNumbers.push(fibGen.next().value as string);
+                    }
+                    receivedOutput = fibNumbers;
+                    break;
             default:
                 throw new Error(`Invalid function name: ${functionName}`);
         }
+
+        
 
         if (expectedOutput instanceof Error) {
             testPassed = receivedOutput instanceof Error && receivedOutput.message === expectedOutput.message;

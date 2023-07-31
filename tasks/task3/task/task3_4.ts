@@ -1,3 +1,6 @@
+import { multiply } from "../../task1/task/task1_newVersion";
+
+
 
 /**
  * Implement a recursive function called `calculateFactorial` that calculates the factorial of a given number. Optimize the function to use tail call optimization to avoid stack overflow for large input numbers.
@@ -5,7 +8,7 @@
  * @param acc - tail call optimisation val
  * @returns the factorial of a given number
  */             
-export function calculateFactorial(n: number, acc: number = 1): number 
+export function calculateFactorial(n: number, acc: string = '1'): string 
 {
     if (n <= 1) 
     {
@@ -13,7 +16,7 @@ export function calculateFactorial(n: number, acc: number = 1): number
     } 
     else 
     {
-        return calculateFactorial(n - 1, n * acc);
+        return calculateFactorial(n - 1, multiply(acc + ' ' + n));
     }
 }
 
@@ -23,14 +26,14 @@ export function calculateFactorial(n: number, acc: number = 1): number
  * @param exponent - the exp of the base
  * @returns the power of the base to the exp
  */
-export function power(base: number, exponent: number): number 
+export function power(base: number, exponent: number, acc: string = '1'): string 
 {
     if (exponent === 0) 
     {
-        return 1;
+        return acc;
     } 
     else 
     {
-        return base * power(base, exponent - 1);
+        return power(base, exponent - 1, multiply(acc + ' ' + base));
     }
 }

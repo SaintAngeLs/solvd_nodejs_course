@@ -12,6 +12,9 @@ import {
     powerTestCases,
     lazyMapTestCases,
     fibonacciGeneratorTestCases,
+    fibonacciGeneratorLargeInputTestCases,
+    calculateFactorialLargeInputTestCases,
+    powerTestLargeInputTestCases,
 
 } from './testCases';
 import { runTestCases } from "./testRun";
@@ -31,6 +34,9 @@ export function runTestsTask3(): TestResult[]  {
   testCasesMap.set('power', powerTestCases);
   testCasesMap.set('lazyMap', lazyMapTestCases);
   testCasesMap.set('fibonacciGenerator', fibonacciGeneratorTestCases);
+  testCasesMap.set('fibonacciGenerator', fibonacciGeneratorLargeInputTestCases);
+  testCasesMap.set('calculateFactorial', calculateFactorialLargeInputTestCases);
+  testCasesMap.set('power',powerTestLargeInputTestCases)
 
   
 
