@@ -2,6 +2,8 @@ import { runTestsTask1 } from '@/tasks/task1/test/task1_test';
 import { runTestsTask2 } from '@/tasks/task2/test/task2_test';
 import { runTestsTask3 } from '@/tasks/task3/test/task3_test';
 import React, { useState } from 'react';
+import { BarLoader } from 'react-spinners';
+
 
 
 const tasks = [
@@ -40,6 +42,8 @@ function replacer(key, value) {
 }
 
 const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, toggleNotesVisibility }) => {
+  const [loading, setLoading] = useState(false);
+
   const [testResults1, setTestResults1] = useState([]);
   const [testResults2, setTestResults2] = useState([]);
   const [testResults3, setTestResults3] = useState([]);
@@ -47,6 +51,7 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
 
   const runTestsAndStoreResults = (taskNumber) => {
     let testResults = [];
+    setLoading(true);
     if (taskNumber === 1) {
       testResults = runTestsTask1();
       setTestResults1(testResults);
@@ -57,6 +62,7 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
       testResults = runTestsTask3();
       setTestResults3(testResults);
     }
+    setLoading(false);
   };
 
   const clearTestResults = () => {
@@ -115,8 +121,15 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
                 <tr>
                   <td className="table-hidden-td" colSpan={6}>
                     Solution: {task.solution}
+                    
                     <div>
-                      <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => runTestsAndStoreResults(task.number)}>Run Tests</button>
+                    {loading ? (
+                          <div className="my-10">
+                            <BarLoader color={"#123abc"}  height={50}  width={100} loading={loading} />
+                          </div>
+                        ) : (
+                          <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => runTestsAndStoreResults(task.number)}>Run Tests</button>
+                        )}
                     </div>
                   </td>
                 </tr>
