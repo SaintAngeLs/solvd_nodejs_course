@@ -81,3 +81,17 @@ export { person } from './task4_1';
 
 export type { Product } from './task4_2';
 export { product, getTotalPrice, deleteNonConfigurable } from './task4_2';
+
+export type { BankAccount } from './task4_3';
+export { bankAccount } from './task4_3';
+
+export type { AnyObject } from './task4_4';
+export { createImmutableObject } from './task4_4';
+
+export type { Callback } from './task4_5';
+export { observeObject } from './task4_5';
+
+export { deepCloneObject } from './task4_6';
+
+export type { Schema } from './task4_7';
+export { validateObject, } from './task4_7';
