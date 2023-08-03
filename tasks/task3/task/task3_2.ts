@@ -33,7 +33,7 @@ export function getFullName(person: Person): string
  */
 export function filterUniqueWords(text: string): string[] 
 {
-    return Array.from(new Set(text.split(' '))).sort();
+    return Array.from(new Set(text.toLowerCase().split(' '))).sort();
 }
 
 /**

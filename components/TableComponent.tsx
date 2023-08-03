@@ -28,6 +28,20 @@ const tasks = [
     deadline: '2023-07-20', 
     solution: 'Solution 3' 
   },
+  { 
+    number: 4, 
+    name: '{}', 
+    assignmentDate: '2023-07-20', 
+    deadline: '2023-08-08', 
+    solution: 'Solution 3' 
+  },
+  { 
+    number: 5, 
+    name: '{}', 
+    assignmentDate: '2023-08-02', 
+    deadline: '2023-08-08', 
+    solution: 'Solution 3' 
+  },
 
   // TASK_3, ..., TASK_N
   
@@ -47,6 +61,8 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
   const [testResults1, setTestResults1] = useState([]);
   const [testResults2, setTestResults2] = useState([]);
   const [testResults3, setTestResults3] = useState([]);
+  const [testResults4, setTestResults4] = useState([]);
+  const [testResults5, setTestResults5] = useState([]);
 
 
   const runTestsAndStoreResults = (taskNumber) => {
@@ -62,6 +78,15 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
       testResults = runTestsTask3();
       setTestResults3(testResults);
     }
+    else if (taskNumber === 4){
+      testResults = runTestsTask4();
+      setTestResults3(testResults);
+    }
+    else if (taskNumber === 5){
+      testResults = runTestsTask5();
+      setTestResults3(testResults);
+    }
+    
     setLoading(false);
   };
 

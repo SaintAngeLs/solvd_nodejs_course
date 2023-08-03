@@ -58,6 +58,10 @@ describe("Task 3 tests", () => {
         const text = "apple banana apple cherry banana";
         expect(filterUniqueWords(text)).toEqual(["apple", "banana", "cherry"]);
     });
+    test("filterUniqueWords", () => {
+        const text = "Hi Andrii hi";
+        expect(filterUniqueWords(text)).toEqual(["andrii", "hi"]);
+    });
 
     test("getAverageGrade", () => {
         const students = [

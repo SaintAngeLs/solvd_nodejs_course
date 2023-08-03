@@ -30,7 +30,7 @@ export const filterUniqueWordsTestCases: TestCase[] = [
     {
         testName: 'Filter unique words from a string',
         input: 'This is a test. This is only a test.',
-        expectedOutput: ['This', 'a', 'is', 'only', 'test.'].sort(),
+        expectedOutput: ['this', 'a', 'is', 'only', 'test.'].sort(),
     },
 ];
 
