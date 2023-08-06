@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 
 ## Project Overview
 ![Screenshot of the project](./image_to_readme.png)
@@ -9,22 +7,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
-# (RECOMMENDED by A.V.!)
+# (RECOMMENDED by A.V.!) to build the Next UI
+# With the case in mind to see the numerical user tests for some cases and tasks;
 docker-compose up --build --force-recreate
 # or
 npm run dev
-# or  (the project was not deployed with the yarn pm :( )
-yarn dev
+# To see the results of the development test build with the accordance to the specification
 # To run the development tests
 npx jest
 
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result(in case of modification the Dockerfile try another one).
+[http://localhost:3000](http://localhost:3000)  with your browser will follow up with seeing the result (in case of modification the Dockerfile try another port).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
