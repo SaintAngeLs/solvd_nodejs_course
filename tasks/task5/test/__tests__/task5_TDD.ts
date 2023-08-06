@@ -91,6 +91,13 @@ describe('Array utilities - customShuffle', () => {
       customShuffle(input);
       expect(input).toEqual(originalInputCopy);  
     });
+
+    it("Alexandrina's symphony: TEST SZEFA dla duzego wejscia", () => {
+      const input = generateStringArray(10000000n, 10);
+      const originalInputCopy = [...input];  
+      customShuffle(input);
+      expect(input).toEqual(originalInputCopy);  
+    });
    
 });
 
@@ -102,6 +109,24 @@ describe('Array utilities - customShuffle', () => {
 function generateSequentialArray(n: number): number[] 
 {
   return Array.from({ length: n }, (_, i) => i + 1);
+}
+
+/**
+ * Generates an array of strings with specified length and word size.
+ * 
+ * Example: generateStringArray(3n, 2) will return ['11', '22', '33']
+ * 
+ * @param n - Number of elements in the array.
+ * @param wordSize - The length of each string in the array (each string consists of repeated digits).
+ * @returns An array of strings.
+ */
+function generateStringArray(n: bigint, wordSize: number): string[] 
+{
+  return Array.from({ length: Number(n) }, (_, i) => {
+    const number = BigInt(i) + 1n;
+    const str = number.toString().repeat(wordSize);
+    return str.substring(0, wordSize);
+  });
 }
 
 import {getArrayIntersection} from '../../task/task5';
