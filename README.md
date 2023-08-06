@@ -15,6 +15,8 @@ npm run dev
 # To see the results of the development test build with the accordance to the specification
 # To run the development tests
 npx jest
+# instead of using the "npm jest --verbose" use the npm test to see the result of each TTD test
+npm test
 
 ```
 
