@@ -18,7 +18,7 @@ npx jest
 # instead of using the "npm jest --verbose" use the npm test to see the result of each TTD test
 npm test
 # To run the development test suite for the task i, i \in {1, 2, ..., n}, where n is a general numer of all the tasks during the course, run:
-nppm test task{i}_TDD # where {i} - is a number of the task is supposed to be tested 
+npm test task{i}_TDD # where {i} - is a number of the task is supposed to be tested 
 
 ```
 
