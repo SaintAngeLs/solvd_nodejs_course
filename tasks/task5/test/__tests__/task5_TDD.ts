@@ -97,7 +97,7 @@ describe('Array utilities - customShuffle', () => {
 /**
  * The efficiency test function for the number type in the array (only for safe interval)
  * @param n 
- * @returns 
+ * @returns [1, 2, 3, ..., n ]
  */
 function generateSequentialArray(n: number): number[] 
 {
