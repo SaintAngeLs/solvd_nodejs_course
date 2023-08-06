@@ -16,11 +16,16 @@
  */
 export function customShuffle<T>(array: T[]): T[] 
 {
-    for (let i = array.length - 1; i > 0; i--) 
+    // (*) TODO: the function cusomShuffle<T>(array: T[]) is not supposed to change the array obtained from the input.
+
+    // According to (*), the function will provide the operation on the copy ot the inpyt array;
+    
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) 
     {
         const j = Math.floor(Math.random() * (i + 1));
 
-        [array[i], array[j]] = [array[j], array[i]];
+        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
-    return array;
+    return shuffledArray;
 }

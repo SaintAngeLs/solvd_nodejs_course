@@ -10,15 +10,23 @@
 
  */
 
-export function customFilterUnique<T>(arr: T[], callback: (arr: T[], val: T) => boolean): T[]
+export function customFilterUnique<T, K>(arr: T[], callback: (val: T) => K): T[]
 {
+
+    // TODO: ensure that the customFilterUnique function itself maintains this uniqueness based on the callback's logic.
+
+    const seen = new Set<K>();
+
     const result: T[] = [];
     for (const element of arr) 
     {
-        if (callback(result, element)) 
+        const key = callback(element);
+        if (!seen.has(key)) 
         {
+            seen.add(key);
             result.push(element);
         }
     }
+    
     return result;
 }

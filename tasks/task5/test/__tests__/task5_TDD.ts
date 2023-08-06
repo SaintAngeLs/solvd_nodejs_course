@@ -4,22 +4,22 @@ describe('Array utilities - customFilterUnique', () => {
   
     // empty input
     it('should return an empty array when input is empty', () => {
-        const input: any = [];
-        const output = customFilterUnique(input, (arr: {id: number}[], val: {id: number}) => !arr.some(a => a.id === val.id));
+        const input: { id: number }[] = [];;
+        const output = customFilterUnique(input, val => val.id);
         expect(output).toEqual([]);
       });
 
     // filter unique
     it('customFilterUnique', () => {
       const input = [{id: 1}, {id: 2}, {id: 1}, {id: 3}, {id: 2}];
-      const output = customFilterUnique(input, (arr, val) => !arr.some(a => a.id === val.id));
+      const output = customFilterUnique(input, val => val.id);
       expect(output).toEqual([{id: 1}, {id: 2}, {id: 3}]);
     });
     
     // no duplicates
     it('should return the array without duplicates', () => {
         const input = [{id: 1}, {id: 2}, {id: 1}, {id: 3}, {id: 2}];
-        const output = customFilterUnique(input, (arr: {id: number}[], val: {id: number}) => !arr.some((a: {id: number}) => a.id === val.id));
+        const output = customFilterUnique(input, val => val.id);
         expect(output).toEqual([{id: 1}, {id: 2}, {id: 3}]);
     });
     
@@ -83,9 +83,26 @@ describe('Array utilities - customShuffle', () => {
         const input = [1];
         const output = customShuffle(input);
         expect(output).toEqual([1]);
-      });
+    });
+
+    it("Alexandrina's test: should not modify the original array", () => {
+      const input = generateSequentialArray(1000000);
+      const originalInputCopy = [...input];  
+      customShuffle(input);
+      expect(input).toEqual(originalInputCopy);  
+    });
    
 });
+
+/**
+ * The efficiency test function for the number type in the array (only for safe interval)
+ * @param n 
+ * @returns 
+ */
+function generateSequentialArray(n: number): number[] 
+{
+  return Array.from({ length: n }, (_, i) => i + 1);
+}
 
 import {getArrayIntersection} from '../../task/task5';
 describe('Array utilities - getArrayIntersection', () => {
