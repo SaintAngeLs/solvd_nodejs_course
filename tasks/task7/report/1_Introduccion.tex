@@ -35,12 +35,12 @@ Our methodology for evaluating the performance of these algorithms hinges on the
 \[ T_{\text{MergeSort}}(n^*) < T_{\text{BubbleSort}}(n^*) \]
 
 \item For reliability, let each sorting test for a specific \( n \) be performed \( k \) times, where \( k \) is a sufficiently large number. The average time for each sort on that \( n \) is then given by:
-\[ \bar{T}_{\text{QuickSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{QuickSort},i}(n) \]
-\[ \bar{T}_{\text{BubbleSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{BubbleSort},i}(n) \]
-\[ \bar{T}_{\text{MergeSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{MergeSort},i}(n) \]
-Where \( T_{\text{QuickSort},i}(n) \), \( T_{\text{BubbleSort},i}(n) \), and \( T_{\text{MergeSort},i}(n) \) are the individual execution times for the \( i^{th} \) test.
+\[ \bar{T}_{\text{QuickSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{QuickSort},j}(n) \]
+\[ \bar{T}_{\text{BubbleSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{BubbleSort},j}(n) \]
+\[ \bar{T}_{\text{MergeSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{MergeSort},j}(n) \]
+Where \( T_{\text{QuickSort},j}(n) \), \( T_{\text{BubbleSort},j}(n) \), and \( T_{\text{MergeSort},j}(n) \) are the individual execution times for the \( j^{th} \) test.
 
-\item After determining \( n^* \), we extend our analysis to \( n^* + m \) for some chosen \( m > 0 \). The objective is to analyze the growth behavior of the sorting algorithms. This could be mathematically described as analyzing the function behaviors of \( \bar{T}_{\text{QuickSort}}(n) \), \( \bar{T}_{\text{BubbleSort}}(n) \), and \( \bar{T}_{\text{MergeSort}}(n) \) for \( n > n^* \).
+\item After determining \( n^* \), we extend our analysis to \( n^* + m \) for some chosen \( m > 0 \). The objective is to analyze the growth behavior of the sorting algorithms. This could be described as analyzing the function behaviors of \( \bar{T}_{\text{QuickSort}}(n) \), \( \bar{T}_{\text{BubbleSort}}(n) \), and \( \bar{T}_{\text{MergeSort}}(n) \) for \( n > n^* \).
 \end{enumerate}
 
 With the methodology firmly set, the following sections will unfurl the results and delve into a comprehensive analysis.

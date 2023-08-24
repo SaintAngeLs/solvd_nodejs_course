@@ -1,11 +1,22 @@
-\textcolor{blue}{\section{Preguntas de comprension}}
 
+\textcolor{blue}{\section{Proof of Performance Superiority}}
 
-En esta sección se agregaran las preguntas de comprensión que vienen al final de cada practica, en algunos pocos casos las preguntas vienen a lo largo del desarrollo de la practica.
+\subsection{Random Case Analysis}
 
-Las respuestas a dichas preguntas deberan ser escritas en un color diferente a la pregunta, siempre y cuando el color sea legible. Por ejemplo:
+Given the data for the random case in Table 1, we observed that for \( n = 342 \):
+\[ \bar{T}_{\text{QuickSort}}(342) < \bar{T}_{\text{BubbleSort}}(342) \]
+\[ \text{and} \]
+\[ \bar{T}_{\text{MergeSort}}(342) < \bar{T}_{\text{BubbleSort}}(342) \]
 
-\begin{itemize}
-    \item ¿Cuales son los tres tipos de circuitos rectificadores mas utilizados?
-    \textcolor{blue}{Los tres tipos de circuitos rectificadores mas utilizados son: rectificador de media onda, rectificador de onda completa con derivación central y rectificador de onda completa con puente de diodos.}
-\end{itemize}
+From the definition of our function \( \bar{T} \) and the data, it can be seen that these inequalities hold true. Further, as \( n \) grows, this trend consistently continues, solidifying the evidence that for random cases with \( n \geq 342 \), both QuickSort and MergeSort are superior in efficiency compared to BubbleSort.
+
+\subsection{Worst Case Analysis}
+
+Referring to the worst-case data in Table \ref{table:worst_case}, it is evident that for \( n = 472 \):
+\[ \bar{T}_{\text{QuickSort}}(472) < \bar{T}_{\text{BubbleSort}}(472) \]
+\[ \text{and} \]
+\[ \bar{T}_{\text{MergeSort}}(472) < \bar{T}_{\text{BubbleSort}}(472) \]
+
+Again, leaning on our function \( \bar{T} \) and the given data, these inequalities hold true. With an increase in \( n \), this trend remains consistent, bolstering the assertion that for worst-case scenarios with \( n \geq 467 \), QuickSort and MergeSort emerge as more efficient than BubbleSort, which will slightly indicate the value of the \( n^* \).
+
+\textbf{Conclusion:} From our detailed analysis, it's conclusively evident, under the testing conditions and given the performance metrics, that QuickSort and MergeSort consistently outperform BubbleSort beyond certain array lengths in both random and worst-case scenarios.

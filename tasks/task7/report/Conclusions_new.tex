@@ -1,0 +1,17 @@
+\textcolor{blue}{\section{Conclusion}}
+
+Sorting algorithms, by virtue of their foundational importance in computer science, have been a subject of continuous exploration. This study aimed to discern the relative efficiencies of three prevalent sorting algorithms: BubbleSort, QuickSort, and MergeSort.
+
+From our rigorous evaluations, we observed pivotal values of \( n \), specifically \( n^* \), where the performance characteristics of these algorithms diverge significantly. Mathematically, for the random case, we determined that at \( n = 342 \):
+\[ \bar{T}_{\text{QuickSort}}(342) < \bar{T}_{\text{BubbleSort}}(342) \]
+\[ \text{and} \]
+\[ \bar{T}_{\text{MergeSort}}(342) < \bar{T}_{\text{BubbleSort}}(342) \]
+
+For the worst-case scenario, these disparities were discernible at \( n = 472 \):
+\[ \bar{T}_{\text{QuickSort}}(472) < \bar{T}_{\text{BubbleSort}}(472) \]
+\[ \text{and} \]
+\[ \bar{T}_{\text{MergeSort}}(472) < \bar{T}_{\text{BubbleSort}}(472) \]
+
+These mathematical conclusions, drawn from the experimental results, underline BubbleSort's inefficiencies when confronted with larger array sizes. Both QuickSort and MergeSort, with complexities in the ballpark of \(O(n \log n)\), showcased their resilience and efficiency, outperforming the \(O(n^2)\) complexity of BubbleSort beyond the established thresholds of \( n^* \).
+
+In essence, our findings highlight the essentiality of choosing the appropriate sorting algorithm tailored to the specific nature and size of the dataset in question. For larger datasets, the robustness and efficiency of QuickSort and MergeSort are incontrovertible.

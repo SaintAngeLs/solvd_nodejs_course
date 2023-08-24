@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.5.13)  24 AUG 2023 23:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Debian) (preloaded format=pdflatex 2023.5.13)  25 AUG 2023 00:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -835,7 +835,7 @@ See the Listings package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.98 ...=PseudoCode, caption=BubbleSort Algorithm]
+l.98 ...:bubblesort, caption=BubbleSort Algorithm]
                                                   
 The following languages weren't loadable:
     ,pseudocode$
@@ -848,7 +848,7 @@ See the Listings package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.98 ...=PseudoCode, caption=BubbleSort Algorithm]
+l.98 ...:bubblesort, caption=BubbleSort Algorithm]
                                                   
 The language is not loadable. Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -889,56 +889,54 @@ If that doesn't work, type  X <return>  to quit.
 
 ) (./3_Conclusiones.tex
 
+LaTeX Warning: Reference `random_case' on page 3 undefined on input line 3.
+
+
+LaTeX Warning: Reference `worst_case' on page 3 undefined on input line 3.
+
+
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) (./4_Preguntas.tex [3]) (./5_Bibliografia.tex) [4
 
-] (./main.aux
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) (./4_Preguntas.tex [3]) (./Conclusions_new.tex) (./5_Bibliografia.tex)
+[4] (./main.aux
 LaTeX Info: Redefining \. on input line 23.
 LaTeX Info: Redefining \% on input line 23.
 )
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were undefined references.
 
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 341F2A47793187D452080F22A386A710;2595
-(rerunfilecheck)             After:  DB7D9EAFF2BFF8EEBE5A4C288E8884A8;2638.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 97A8657E0F4611325ED18ECAED626C92;3098.
  ) 
 Here is how much of TeX's memory you used:
- 17248 strings out of 476091
- 281087 string characters out of 5794081
- 2405330 words of memory out of 5000000
- 37152 multiletter control sequences out of 15000+600000
- 555287 words of font info for 120 fonts, out of 8000000 for 9000
+ 17249 strings out of 476091
+ 281190 string characters out of 5794081
+ 2406330 words of memory out of 5000000
+ 37153 multiletter control sequences out of 15000+600000
+ 553603 words of font info for 118 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
- 80i,11n,120p,524b,1594s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{section*.2} has been referenced but does not exist,
- replaced by a fixed one
-
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/sh
-are/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
-s/utmri8a.pfb>
-Output written on main.pdf (4 pages, 179656 bytes).
+ 80i,11n,120p,524b,1569s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
+mes/utmri8a.pfb>
+Output written on main.pdf (4 pages, 182346 bytes).
 PDF statistics:
- 318 PDF objects out of 1000 (max. 8388607)
- 281 compressed objects within 3 object streams
- 142 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 327 PDF objects out of 1000 (max. 8388607)
+ 290 compressed objects within 3 object streams
+ 140 named destinations out of 1000 (max. 500000)
+ 161 words of extra memory for PDF output out of 10000 (max. 10000000)
 

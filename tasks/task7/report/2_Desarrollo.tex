@@ -3,7 +3,7 @@
 In the realm of computer science, sorting algorithms are fundamental constructs that order elements in a specific sequence or manner. Each sorting algorithm has a unique design and approach that offers advantages in certain scenarios over others. In this section section we discuss the logic behind three classic sorting algorithms in this research: QuickSort, BubbleSort, and MergeSort, highlighting their complexities and the specific cases where they are most effective.
 
 \subsection{QuickSort}
-QuickSort is a divide-and-conquer sorting algorithm that selects an element, referred to as the "pivot", and partitions the array around the pivot. The algorithm then recursively applies the same logic to the sub-arrays.
+QuickSort is a divide-and-conquer sorting algorithm that selects an element, referred to as the "pivot", and partitions the array around the pivot. The algorithm then recursively applies the same logic to the sub-arrays. The implementation of the algorithm is represented in Listing \ref{lst:quicksort},
 
 \textbf{Complexity:}
 - Average Time Complexity: \(O(n \log n)\)
@@ -14,7 +14,7 @@ QuickSort is a divide-and-conquer sorting algorithm that selects an element, ref
 QuickSort is usually faster in practice than other \(O(n \log n)\) algorithms like MergeSort or HeapSort. It works especially well when the pivots chosen are median or near-median values. However, its worst-case time complexity can be a limitation with certain datasets or if the pivot selection strategy isn't effective.
 
 
-\begin{lstlisting}[language=PseudoCode, caption=QuickSort and its Partition function]
+\begin{lstlisting}[language=PseudoCode, label=lst:quicksort, caption=QuickSort and its Partition function]
 /**
  * Sorts an array using the QuickSort algorithm.
  * 
@@ -92,10 +92,10 @@ BubbleSort is a simple comparison-based sorting algorithm. It repeatedly steps t
 - Space Complexity: \(O(1)\)
 
 \textbf{Effective Usage:}
-Due to its simplicity, BubbleSort can be effective for smaller lists or lists that are mostly sorted. However, for larger datasets, its quadratic time complexity makes it less efficient compared to more advanced sorting algorithms.
+Due to its simplicity, BubbleSort can be effective for smaller lists or lists that are mostly sorted. However, for larger datasets, its quadratic time complexity makes it less efficient compared to more advanced sorting algorithms.  The implementation of the algorithm is represented in Listing \ref{lst:bubblesort},
 
 
-\begin{lstlisting}[language=PseudoCode, caption=BubbleSort Algorithm]
+\begin{lstlisting}[language=PseudoCode, label=lst:bubblesort, caption=BubbleSort Algorithm]
 /**
  * Sorts an array using the BubbleSort algorithm.
  * 
@@ -143,10 +143,10 @@ MergeSort is another divide-and-conquer algorithm that works by recursively spli
 - Space Complexity: \(O(n)\)
 
 \textbf{Effective Usage:}
-MergeSort is a stable sort and guarantees \(O(n \log n)\) time complexity in the worst case. This makes it a reliable choice for many applications. It is especially useful when data is stored in linked lists because of its linear space complexity, or when stability in sorting is a requirement.
+MergeSort is a stable sort and guarantees \(O(n \log n)\) time complexity in the worst case. This makes it a reliable choice for many applications. It is especially useful when data is stored in linked lists because of its linear space complexity, or when stability in sorting is a requirement.  The implementation of the algorithm is represented in Listing \ref{lst:mergesort},
 
 
-\begin{lstlisting}[language=PseudoCode, caption=MergeSort and its Merge function]
+\begin{lstlisting}[language=PseudoCode, label=lst:mergesort, caption=MergeSort and its Merge function]
 /**
  * Sorts an array using the MergeSort algorithm.
  * 

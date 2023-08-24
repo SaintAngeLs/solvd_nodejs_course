@@ -431,9 +431,13 @@ function exportCSVFile(items, fileName = 'data') {
                         {filteredTestResults7.random.map((result) => (
                             <tr key={result.arrayLength}>
                                 <td>{result.arrayLength}</td>
-                                <td>{result.quickSortTime.toFixed(6)} ms</td>
+                                <td className={`${result.quickSortTime < result.bubbleSortTime ? 'bg-green-400' : ''}`}>
+                                  {result.quickSortTime.toFixed(6)} ms
+                                </td>
                                 <td>{result.bubbleSortTime.toFixed(6)} ms</td>
-                                <td>{result.mergeSortTime.toFixed(6)} ms</td>
+                                <td  className={`${result.mergeSortTime < result.bubbleSortTime ? 'bg-green-400' : ''}`}>
+                                  {result.mergeSortTime.toFixed(6)} ms
+                                </td>
                             </tr>
                         ))}
                     </tbody>
@@ -456,13 +460,15 @@ function exportCSVFile(items, fileName = 'data') {
                         {filteredTestResults7.worstCase.map((result) => (
                             <tr key={result.arrayLength}>
                                 <td>{result.arrayLength}</td>
-                                <td style={{backgroundColor: result.quickSortTime < result.bubbleSortTime ? 'green' : 'transparent'}}>
+                                <td className={`${result.quickSortTime < result.bubbleSortTime ? 'bg-green-400' : ''}`}>
                                   {result.quickSortTime.toFixed(6)} ms
                                 </td>
-                                <td style={{backgroundColor: result.mergeSortTime < result.bubbleSortTime ? 'green' : 'transparent'}}>
-                                {result.bubbleSortTime.toFixed(6)} ms
+                                <td>
+                                  {result.bubbleSortTime.toFixed(6)} ms
                                 </td>
-                                <td>{result.mergeSortTime.toFixed(6)} ms</td>
+                                <td className={`${result.mergeSortTime < result.bubbleSortTime ? 'bg-green-400' : ''}`}>
+                                  {result.mergeSortTime.toFixed(6)} ms
+                                </td>
                             </tr>
                         ))}
                     </tbody>
