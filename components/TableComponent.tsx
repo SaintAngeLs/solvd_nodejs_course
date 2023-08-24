@@ -1,6 +1,8 @@
 import { runTestsTask1 } from '@/tasks/task1/test/task1_test';
 import { runTestsTask2 } from '@/tasks/task2/test/task2_test';
 import { runTestsTask3 } from '@/tasks/task3/test/task3_test';
+import { performanceTest as runTestsTask7} from '@/tasks/task7/test/performanceTest';
+
 import React, { useState } from 'react';
 import { BarLoader } from 'react-spinners';
 
@@ -40,7 +42,21 @@ const tasks = [
     name: '{}', 
     assignmentDate: '2023-08-02', 
     deadline: '2023-08-08', 
-    solution: 'Solution 3' 
+    solution: 'SWas implemented only in the TDD' 
+  },
+  { 
+    number: 6, 
+    name: '{}', 
+    assignmentDate: '2023-08-02', 
+    deadline: '2023-08-08', 
+    solution: 'SWas implemented only in the TDD' 
+  },
+  { 
+    number: 7, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
   },
 
   // TASK_3, ..., TASK_N
@@ -63,6 +79,9 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
   const [testResults3, setTestResults3] = useState([]);
   const [testResults4, setTestResults4] = useState([]);
   const [testResults5, setTestResults5] = useState([]);
+  const [testResults6, setTestResults6] = useState([]);
+  const [testResults7, setTestResults7] = useState([]);
+  const [filterStep, setFilterStep] = useState(1);
 
 
   const runTestsAndStoreResults = (taskNumber) => {
@@ -79,20 +98,75 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
       setTestResults3(testResults);
     }
     else if (taskNumber === 4){
-      testResults = runTestsTask4();
-      setTestResults3(testResults);
+      testResults = [];
+      setTestResults4(testResults);
     }
     else if (taskNumber === 5){
-      testResults = runTestsTask5();
-      setTestResults3(testResults);
+      testResults = [];
+      setTestResults5(testResults);
+    }
+    else if (taskNumber === 6){
+      testResults = [];
+      setTestResults6(testResults);
+    }
+    else if (taskNumber === 7){
+      testResults = runTestsTask7();
+      setTestResults7(testResults);
     }
     
     setLoading(false);
   };
 
+  // filtering in the task 7
+  const filteredTestResults7 = {
+    random: testResults7.random?.filter((_, index) => index % filterStep === 0) || [],
+    worstCase: testResults7.worstCase?.filter((_, index) => index % filterStep === 0) || []
+};
+
+
   const clearTestResults = () => {
     setTestResults1([]);
   };
+
+  function convertToCSV(objArray) {
+    const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
+    let str = '';
+
+    for (let i = 0; i < array.length; i++) {
+        let line = '';
+        for (let index in array[i]) {
+            if (line !== '') line += ',';
+            
+            line += array[i][index];
+        }
+
+        str += line + '\r\n';
+    }
+
+    return str;
+}
+
+function exportCSVFile(items, fileName = 'data') {
+  const csv = convertToCSV(items);
+  const exportedFilename = fileName + '.csv' || 'export.csv';
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  if (navigator.msSaveBlob) { // IE 10+
+      navigator.msSaveBlob(blob, exportedFilename);
+  } else {
+      const link = document.createElement("a");
+      if (link.download !== undefined) { // feature detection
+          const url = URL.createObjectURL(blob);
+          link.setAttribute("href", url);
+          link.setAttribute("download", exportedFilename);
+          link.style.visibility = 'hidden';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+      }
+  }
+}
+
 
   return (
     <main className="flex min-h-screen flex-col p-10">
@@ -287,7 +361,112 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
                    </ul>
                  </td>
                </tr>
+
+               
               )}
+
+                {task.number === 4 && testResults3.length > 0 && (
+                 <tr>
+                  <td colSpan={6}>
+                    <div>
+                      <strong>Test Results for Task {task.number}:</strong>
+                    </div>
+                    <strong>Was implemented only in the development TDD suit CASES</strong>
+                    
+                  </td>
+                  </tr>
+                )}
+                {task.number === 5 && testResults3.length > 0 && (
+                 <tr>
+                  <td colSpan={6}>
+                    <div>
+                      <strong>Test Results for Task {task.number}:</strong>
+                    </div>
+                    <strong>Was implemented only in the development TDD suit CASES</strong>
+                    
+                  </td>
+                  </tr>
+                )}
+                {task.number === 6 && testResults3.length > 0 && (
+                 <tr>
+                  <td colSpan={6}>
+                    <div>
+                      <strong>Test Results for Task {task.number}:</strong>
+                    </div>
+                    <strong>Was implemented only in the development TDD suit CASES</strong>
+                    
+                  </td>
+                  </tr>
+                )}
+                {task.number === 7 && (filteredTestResults7.random.length > 0 || filteredTestResults7.worstCase.length > 0) && (
+                  
+                  <tr>
+                  <td colSpan={6}>
+                      <div>
+                          <strong>Test Results for Task {task.number}:</strong>
+                          <div className = "my-5">
+                            <button className = "bg-blue-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(1)}>Show every 1</button>
+                            <button className = "bg-blue-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(10)}>Show every 10</button>
+                            <button className = "bg-blue-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(100)}>Show every 100</button>
+                            <button className = "bg-green-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition-colors" onClick={() => setFilterStep(100)} onClick={() => exportCSVFile(filteredTestResults7.random, 'RandomResults')}>Export Random Results</button>
+                            <button  className = "bg-green-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition-colors" onClick={() => setFilterStep(100)} onClick={() => exportCSVFile(filteredTestResults7.worstCase, 'WorstCaseResults')}>Export Worst Case Results</button>
+                          </div>
+
+                      </div>
+                      <div className="flex">
+                {/* random results */}
+                <table className="mx-10  my-5">
+                    <thead>
+                        <tr>
+                            <th colSpan={4} className="text-center">Random</th>
+                        </tr>
+                        <tr>
+                            <th>Array Length</th>
+                            <th>QuickSort Time</th>
+                            <th>BubbleSort Time</th>
+                            <th>Merge Sort Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredTestResults7.random.map((result) => (
+                            <tr key={result.arrayLength}>
+                                <td>{result.arrayLength}</td>
+                                <td>{result.quickSortTime.toFixed(6)} ms</td>
+                                <td>{result.bubbleSortTime.toFixed(6)} ms</td>
+                                <td>{result.mergeSortTime.toFixed(6)} ms</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+                {/* worst-case results */}
+                <table className="mx-10 my-5">
+                    <thead>
+                        <tr>
+                            <th colSpan={4} className="text-center">Worst Case</th>
+                        </tr>
+                        <tr>
+                            <th>Array Length</th>
+                            <th>QuickSort Time</th>
+                            <th>BubbleSort Time</th>
+                            <th>Merge Sort Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredTestResults7.worstCase.map((result) => (
+                            <tr key={result.arrayLength}>
+                                <td>{result.arrayLength}</td>
+                                <td>{result.quickSortTime.toFixed(6)} ms</td>
+                                <td>{result.bubbleSortTime.toFixed(6)} ms</td>
+                                <td>{result.mergeSortTime.toFixed(6)} ms</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+                  </td>
+              </tr>
+                )}
             </>
           ))}
         </tbody>
