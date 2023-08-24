@@ -407,9 +407,10 @@ function exportCSVFile(items, fileName = 'data') {
                           <div className = "my-5">
                             <button className = "bg-blue-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(1)}>Show every 1</button>
                             <button className = "bg-blue-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(10)}>Show every 10</button>
-                            <button className = "bg-blue-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(100)}>Show every 100</button>
-                            <button className = "bg-green-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition-colors" onClick={() => setFilterStep(100)} onClick={() => exportCSVFile(filteredTestResults7.random, 'RandomResults')}>Export Random Results</button>
-                            <button  className = "bg-green-500 mx-5 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition-colors" onClick={() => setFilterStep(100)} onClick={() => exportCSVFile(filteredTestResults7.worstCase, 'WorstCaseResults')}>Export Worst Case Results</button>
+                            <button className = "bg-blue-500 mx-2 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 transition-colors" onClick={() => setFilterStep(100)}>Show every 100</button>
+                            <button className = "bg-green-500 mx-2 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition-colors" onClick={() => setFilterStep(100)} onClick={() => exportCSVFile(filteredTestResults7.random, 'RandomResults')}>Export Random Results</button>
+                            <button  className = "bg-green-500 mx-2 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition-colors" onClick={() => setFilterStep(100)} onClick={() => exportCSVFile(filteredTestResults7.worstCase, 'WorstCaseResults')}>Export Worst Case Results</button>
+                            <a href="/main.pdf" className="bg-red-500 mx-2 text-white px-4 py-2 rounded mt-4 hover:bg-red-600 transition-colors">Download PDF Report</a>
                           </div>
 
                       </div>
