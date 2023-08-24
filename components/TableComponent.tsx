@@ -456,8 +456,12 @@ function exportCSVFile(items, fileName = 'data') {
                         {filteredTestResults7.worstCase.map((result) => (
                             <tr key={result.arrayLength}>
                                 <td>{result.arrayLength}</td>
-                                <td>{result.quickSortTime.toFixed(6)} ms</td>
-                                <td>{result.bubbleSortTime.toFixed(6)} ms</td>
+                                <td style={{backgroundColor: result.quickSortTime < result.bubbleSortTime ? 'green' : 'transparent'}}>
+                                  {result.quickSortTime.toFixed(6)} ms
+                                </td>
+                                <td style={{backgroundColor: result.mergeSortTime < result.bubbleSortTime ? 'green' : 'transparent'}}>
+                                {result.bubbleSortTime.toFixed(6)} ms
+                                </td>
                                 <td>{result.mergeSortTime.toFixed(6)} ms</td>
                             </tr>
                         ))}

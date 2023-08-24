@@ -1,114 +1,233 @@
-\textcolor{blue}{\section{Desarrollo de la práctica}}
-En esta sección se describen los diferentes experimentos, montajes, cálculos o simulaciones hechas durante la práctica de laboratorio, junto a los resultados obtenidos representados mediante gráficas y tablas. Cada punto de la práctica puede numerase o colocarse como una subsección con un título adecuado.
-A continuacion se muestran algunos ejemplos de como agregar diferentes elementos al documento
+\textcolor{blue}{\section{The approach of the Sorting Algorithms}}
 
-\subsection{Listas y enumeraciones en LaTeX}
+In the realm of computer science, sorting algorithms are fundamental constructs that order elements in a specific sequence or manner. Each sorting algorithm has a unique design and approach that offers advantages in certain scenarios over others. In this section section we discuss the logic behind three classic sorting algorithms in this research: QuickSort, BubbleSort, and MergeSort, highlighting their complexities and the specific cases where they are most effective.
 
-Para agregar una lista usamos el siguiente formato:
+\subsection{QuickSort}
+QuickSort is a divide-and-conquer sorting algorithm that selects an element, referred to as the "pivot", and partitions the array around the pivot. The algorithm then recursively applies the same logic to the sub-arrays.
+
+\textbf{Complexity:}
+- Average Time Complexity: \(O(n \log n)\)
+- Worst-Case Time Complexity: \(O(n^2)\)
+- Space Complexity: \(O(\log n)\)
+
+\textbf{Effective Usage:}
+QuickSort is usually faster in practice than other \(O(n \log n)\) algorithms like MergeSort or HeapSort. It works especially well when the pivots chosen are median or near-median values. However, its worst-case time complexity can be a limitation with certain datasets or if the pivot selection strategy isn't effective.
+
+
+\begin{lstlisting}[language=PseudoCode, caption=QuickSort and its Partition function]
+/**
+ * Sorts an array using the QuickSort algorithm.
+ * 
+ * @param A: The array to be sorted.
+ * @param start: The starting index of the portion of A to be sorted.
+ * @param end: The ending index of the portion of A to be sorted.
+ */
+Function QuickSort(A, start, end)
+    if start < end
+        pivotIndex (*@$\leftarrow$@*) Partition(A, start, end)
+        QuickSort(A, start, pivotIndex - 1)
+        QuickSort(A, pivotIndex + 1, end)
+    end if
+
+/**
+ * Partitions an array around a pivot, such that elements less than the pivot are
+ * on the left, and elements greater than the pivot are on the right.
+ * 
+ * @param A: The array to be partitioned.
+ * @param start: The starting index for the partition.
+ * @param end: The ending index for the partition.
+ * @return: Index of the pivot after partitioning.
+ */
+Function Partition(A, start, end)
+    pivot (*@$\leftarrow$@*)  A[end]
+    pivotIndex (*@$\leftarrow$@*)  start
+    for i from start to end - 1
+        if A[i] (*@$\leq$@*)  pivot
+            swap A[i] and A[pivotIndex]
+            pivotIndex (*@$\leftarrow$@*) pivotIndex + 1
+        end if
+    end for
+    swap A[pivotIndex] and A[end]
+    return pivotIndex
+\end{lstlisting}
+
+\subsection{Average Case Analysis}
+The main value of the final complexity depends on the \textbf{Partition} function implementation.
+When QuickSort partitions the array evenly, the recurrence relation is given by:
+\[
+T_{\text{QuickSort}}(n) = 2T_{\text{QuickSort}}\left(\frac{n}{2}\right) + n
+\]
+Using the Master Theorem, this recurrence yields a time complexity of:
+\[
+T_{\text{QuickSort}}(n) = O(n \log n)
+\]
+
+\subsection{Worst Case Analysis}
+For the worst-case scenario, if the pivot is always the smallest or largest element, the partitioning will be highly unbalanced. The recurrence relation becomes:
+\[
+T_{\text{QuickSort}}(n) = T_{\text{QuickSort}}(n-1) + n
+\]
+Expanding this recurrence:
+\begin{align*}
+T_{\text{QuickSort}}(n) & = n + T_{\text{QuickSort}}(n-1) \\
+& = n + (n-1) + T(n-2) \\
+& = n + (n-1) + (n-2) + \dots + 2 + 1 \\
+& = \sum_{i=1}^{n} i \\
+& = \frac{n(n+1)}{2} \\
+& = \frac{n^2}{2} + \frac{n}{2}
+\end{align*}
+Thus, in the worst-case, the time complexity is:
+\[
+T_{\text{QuickSort}}(n) = O(n^2)
+\]
+
+\subsection{BubbleSort}
+
+BubbleSort is a simple comparison-based sorting algorithm. It repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. This process repeats for each item in the list until the list is sorted.
+
+
+\textbf{Complexity:}
+- Average Time Complexity: \(O(n^2)\)
+- Worst-Case Time Complexity: \(O(n^2)\)
+- Space Complexity: \(O(1)\)
+
+\textbf{Effective Usage:}
+Due to its simplicity, BubbleSort can be effective for smaller lists or lists that are mostly sorted. However, for larger datasets, its quadratic time complexity makes it less efficient compared to more advanced sorting algorithms.
+
+
+\begin{lstlisting}[language=PseudoCode, caption=BubbleSort Algorithm]
+/**
+ * Sorts an array using the BubbleSort algorithm.
+ * 
+ * @param A: The array to be sorted.
+ */
+Function BubbleSort(A)
+    n (*@$\leftarrow$@*)  length(A)
+    for i from 0 to n-1
+        for j from 0 to n-i-1
+            if A[j] > A[j+1]
+                swap A[j] and A[j+1]
+            end if
+        end for
+    end for
+\end{lstlisting}
+
+\subsection{Worst Case Analysis of BubbleSort}
+In the worst-case scenario for BubbleSort, the list is in reverse order. During each iteration of the inner loop, the largest element (or the next largest) is "bubbled up" to its correct position. For an array of size \( n \):
+
+The inner loop will run for:
+\[
+(n-1) + (n-2) + (n-3) + \dots + 1 = \frac{n(n-1)}{2}
+\]
+This yields a worst-case time complexity of:
+\[
+T_{\text{BubbleSort}}(n) = O(n^2)
+\]
+
+\subsection{Average Case Analysis of BubbleSort}
+For the average case, assuming random input, half of the elements will be out of order on average. This means that the inner loop will still perform approximately half of its maximum number of comparisons, which results in the quadratic time complexity.
+
+Thus, the average case time complexity is also:
+\[
+T_{\text{BubbleSort}}(n) = O(n^2)
+\]
+
+
+\subsection{MergeSort}
+
+MergeSort is another divide-and-conquer algorithm that works by recursively splitting the array in half until each sub-array consists of a single element and then merging those sub-arrays in a manner that results in a sorted array.
+
+\textbf{Complexity:}
+- Average Time Complexity: \(O(n \log n)\)
+- Worst-Case Time Complexity: \(O(n \log n)\)
+- Space Complexity: \(O(n)\)
+
+\textbf{Effective Usage:}
+MergeSort is a stable sort and guarantees \(O(n \log n)\) time complexity in the worst case. This makes it a reliable choice for many applications. It is especially useful when data is stored in linked lists because of its linear space complexity, or when stability in sorting is a requirement.
+
+
+\begin{lstlisting}[language=PseudoCode, caption=MergeSort and its Merge function]
+/**
+ * Sorts an array using the MergeSort algorithm.
+ * 
+ * @param A: The array to be sorted.
+ * @param start: The starting index of the portion of A to be sorted.
+ * @param end: The ending index of the portion of A to be sorted.
+ */
+Function MergeSort(A, start, end)
+    if start < end
+        mid (*@$\leftarrow$@*)  (start + end) / 2
+        MergeSort(A, start, mid)
+        MergeSort(A, mid + 1, end)
+        Merge(A, start, mid, end)
+    end if
+    
+/**
+ * Merges two sorted sub-arrays into a single sorted array.
+ * 
+ * @param A: The main array containing the two sub-arrays.
+ * @param start: The starting index of the first sub-array.
+ * @param mid: The ending index of the first sub-array and starting index of the second - 1.
+ * @param end: The ending index of the second sub-array.
+ */
+Function Merge(A, start, mid, end)
+    n1 (*@$\leftarrow$@*)  mid - start + 1
+    n2 (*@$\leftarrow$@*)  end - mid
+    let L[0..n1] and R[0..n2] be new arrays
+    for i = 0 to n1
+        L[i] (*@$\leftarrow$@*)  A[start + i]
+    for j (*@$\leftarrow$@*)  0 to n2
+        R[j] (*@$\leftarrow$@*)  A[mid + j + 1]
+    
+    (i, j, k) (*@$\leftarrow$@*) (0, 0, start)
+    while i < n1 and j < n2
+        if L[i] (*@$\leq$@*) R[j]
+            A[k] (*@$\leftarrow$@*)  L[i]
+            i (*@$\leftarrow$@*)  i + 1
+        else
+            A[k] (*@$\leftarrow$@*)  R[j]
+            j (*@$\leftarrow$@*)  j + 1
+        end if
+        k (*@$\leftarrow$@*)  k + 1
+    end while
+    
+    while i < n1
+        A[k] (*@$\leftarrow$@*)  L[i]
+        i (*@$\leftarrow$@*)  i + 1
+        k (*@$\leftarrow$@*)  k + 1
+    end while
+    while j < n2
+        A[k] (*@$\leftarrow$@*)  R[j]
+        j (*@$\leftarrow$@*)  j + 1
+        k (*@$\leftarrow$@*)  k + 1
+    end while
+\end{lstlisting}
+
+\subsection{Complexity Analysis of MergeSort}
+\subsubsection{Merge Operation}
+The complexity of the merge operation is linear, \(O(n)\), because every element is processed once during the merging phase. The main value of the final complexity depends on the \textbf{Merge} function implementation.
+
+\subsubsection{Recursive Splitting}
+The sorting operation of MergeSort works by recursively dividing the array into two halves and then merging them. Let \(T(n)\) represent the time complexity of sorting an array of size \(n\). The recurrence relation for MergeSort is given by:
+
+\[
+T_{\text{MergeSort}}(n) = 2T_{\text{MergeSort}}\left(\frac{n}{2}\right) + O(n)
+\]
+
+Where:
 \begin{itemize}
-    \item Elemento 1 de la lista
-    \item Elemento 2 de la lista
-    \item Ultimo elemento de la lista
+    \item \(2T_{\text{MergeSort}}\left(\frac{n}{2}\right)\) represents the time to sort the two halves.
+    \item \(O(n)\) represents the time to merge the two halves.
 \end{itemize}
 
-Si queremos agregar una lista enumerada utilizamos el siguiente formato:
-\begin{enumerate}
-    \item Elemento 1 de la lista
-    \item Elemento 2 de la lista
-    \item Ultimo elemento de la lista
-\end{enumerate}
+This recurrence can be solved using the Master Theorem or the tree method. For MergeSort, it resolves to:
 
-\subsection{Figuras en LaTeX}
-Puede agregar fotografias o imagenes al documento utilizando las siguientes extensiones de archivo:
+\[
+T_{\text{MergeSort}}(n) = O(n \log n)
+\]
 
-\begin{itemize}
-    \item JPG: La mejor opción para insertar fotografías
-    \item PNG: La mejor opción para insertar diagramas (si por alguna razón no puedes usar un gráfico vectorial) y capturas de pantalla.
-    \item PDF: A pesar de la costumbre de usar PDF para documentos, en general un PDF puede constar de únicamente una imagen que puede posteriormente ser importada.
-\end{itemize}
+Both for the average and worst-case scenarios.
 
-En el siguiente ejemplo se muestran los comandos para agregar imágenes:
-
-\begin{figure}[h!] \centering 
-\includegraphics[scale=0.45]{RMO}    %Comando para agregar la imagen
-\caption{Pie de imagen: Imagen con extensión PDF}  %Agregar pie de texto
-\label{Fig:Rectificador}         %Etiqueta de la imagen           
-\end{figure}  
-
-\begin{figure}[h!] \centering
-\includegraphics[scale=0.05]{BUTTON}
-\caption{Pie de imagen: Fotografía con extensión  JPG}
-\label{Fig:PushButton}
-\end{figure}  
-
-
-Para referenciar o nombrar una figura en el texto utilizamos el comando ref seguido de la etiqueta de la figura, tal y como se observa en el siguiente ejemplo: 
-
-\textit{En la Figura \ref{Fig:Rectificador} se muestra el circuito esquemático del  rectificador de media onda mientras que  en la Figura \ref{Fig:PushButton} se muestra un circuito básico en protoboard.}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%% ECUACIONES %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ecuaciones en LaTeX}
-
-Para escribir una ecuación utilizamos los siguientes comandos:
-\begin{equation}
-\label{eqID}        %Etiqueta de la ecuacion
-I_D=\frac{q N_A n_i^2}{N_D}\left(\frac{\alpha V_{GS}^2}{\mu_o}\right)^3
-\end{equation}
-
-\begin{equation}\label{Voeq} 
-V_o \approx \int e^XdX
-\end{equation}
-
-Para referenciar o nombrar una ecuación en el texto utilizamos los mismos comandos que se utilizaron para referenciar imagenes tal y como se observa en el siguiente ejemplo:
-
-Las ecuaciones (\ref{eqID} y (\ref{Voeq}) muestran las formulas para calcular $I_D$ y $V_o$ respectivamente.
-
-En el ejemplo anterior se observo tambien que se pueden añadir simbolos matemáticos e incluso ecuaciones sencillas simplemente encerrando las expresiones entre los símbolos de pesos. Por ejemplo: $\alpha$, $I_2$, $I=V/R$. 
-
-Se pueden reportar despejes, cálculos, procedimientos y formulas sin enumerarlos. Por ejemplo el siguiente cálculo:
-\begin{gather*}
-i=\frac{v}{R}\Longrightarrow i=\frac{5}{500}=10 mA
-\end{gather*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Una manera sencilla de generar el código para escribir ecuaciones es utilizando la página \url{http://www.hostmath.com/}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%% TABLAS %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Tablas en LaTeX}
-Para definir una tabla se utilizan los siguientes comandos:
-
-\begin{table}[h!] \centering
-%%%%%%%%%  El siguiente codigo genera la tabla
-\begin{tabular}{@{}|c|l|l|l|@{}}
-\hline
-\multicolumn{1}{|l|}{\textbf{$f (Hz)$}} & \textbf{$v_o$} & \textbf{$G$} & \textbf{$G_{calc}$}\\ \hline
-100                                                         &             &         &    \\ \hline
-200                                                       &             &           &  \\ \hline
-400                                                       &             &            & \\ \hline
-800                                                       &             &           &  \\ \hline
-1600                                                      &             &           &  \\ \hline
-\end{tabular}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% El siguiente codigo es el pie de tabla
-\caption{Variación de frecuencia en el derivador}
-%El siguiente codigo es la etiqueta de la tabla
-\label{Tab:P2_DERFREQ}
-\end{table}   
-
-Para referenciar tablas lo hacemos de la misma forma que se hizo con las imágenes y ecuaciones. Por ejemplo: En la tabla \ref{Tab:P2_DERFREQ} se anotaran los resultados de la variación de frecuencia de la señal de entrada del circuito derivador.
-
-Una manera sencilla de generar el código para escribir ecuaciones es utilizando la página \url{https://www.tablesgenerator.com/}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% CITAR BIBLIOGRAFIA %%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Citar en formato IEEE}
-Para citar referencias bibliográficas se usa el comando cite seguido de la etiqueta de la referencia previamente agregada en la bibliografía. A continuacion se muestran algunos ejemplos:
-
-En \cite{nombre_para_citar} se muestran los campos que deben llenarse en una referencia, en \cite{kopka} se muestra un ejemplo, y en \cite{link} se muestra como citar un enlace. Preferiblemente citar libros y artículos.
 
 %%%%%%%%%
 

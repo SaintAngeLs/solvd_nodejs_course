@@ -1,6 +1,44 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% CUARTA SECCIÓN DEL DOCUMENTO %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\textcolor{blue}{\section{Conclusiones}}
-Reportar en tercera persona las diferentes conclusiones producto de la práctica de laboratorio desarrollada.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textcolor{blue}{\section{Experiment's results}}
+\begin{table}[h!]
+\centering
+\caption{Performance Analysis for Random Case}
+\label{table:random_case}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Array Length & QuickSort Time & BubbleSort Time & Merge Sort Time \\
+\midrule
+2 & 0.040 & 0.020 & 0.020 \\
+102 & 0 & 0.020 & 0.060 \\
+202 & 0.010 & 0.070 & 0.100 \\
+302 & 0.030 & 0.160 & 0.130 \\
+402 & 0.020 & 0.440 & 0.310 \\
+502 & 0.030 & 0.410 & 0.190 \\
+602 & 0 & 0.580 & 0.240 \\
+702 & 0.080 & 0.730 & 0.270 \\
+802 & 0.050 & 0.950 & 0.330 \\
+902 & 0.070 & 1.170 & 0.400 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Performance Analysis for Worst Case}
+\label{table:worst_case}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Array Length & QuickSort Time & BubbleSort Time & Merge Sort Time \\
+\midrule
+2 & 0 & 0 & 0 \\
+102 & 0.010 & 0.030 & 0.030 \\
+202 & 0.020 & 0.050 & 0.110 \\
+302 & 0.130 & 0.120 & 0.070 \\
+402 & 0.180 & 0.230 & 0.160 \\
+502 & 0.280 & 0.370 & 0.200 \\
+602 & 0.420 & 0.530 & 0.240 \\
+702 & 0.540 & 0.730 & 0.250 \\
+802 & 0.840 & 1.060 & 0.410 \\
+902 & 1.060 & 1.340 & 0.440 \\
+\bottomrule
+\end{tabular}
+\end{table}
