@@ -15,7 +15,7 @@ interface PerformanceTestResult {
 }
 
 
-const MAX_ARRAY_LENGTH = 1000;  
+const MAX_ARRAY_LENGTH = 1002;  
 const ITERATIONS_PER_LENGTH = 10;  
 
 export function testSortingPerformanceRandom(): SortResult[] {

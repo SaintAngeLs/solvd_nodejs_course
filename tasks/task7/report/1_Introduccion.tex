@@ -1,0 +1,46 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% PRIMERA SECCIÓN DEL DOCUMENTO %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\textcolor{blue}{\section{Introduction}}
+
+\IEEEPARstart{S}{orting} algorithms have always been a cornerstone in computer science and play a pivotal role in many applications. Efficient sorting is crucial for optimizing downstream operations on data. In this report, we delve into a comparative analysis of three fundamental sorting algorithms: QuickSort, BubbleSort, and Merge Sort.
+
+\subsection{Objective}
+Our primary aim is to discern the efficiency of these algorithms relative to each other. Specifically, we intend to pinpoint the array length at which both QuickSort and Merge Sort begin to outperform BubbleSort consistently. It is noteworthy to mention that the implementation of these algorithms was done from scratch, ensuring a first-principles approach to this analysis.
+
+\subsection{Methodology}
+Our methodology for evaluating the performance of these algorithms hinges on the following procedures:
+\begin{enumerate}
+    \item \textbf{Array Construction:} Lets take into the consideration the next definition $g: \mathbf{R}^2 \rightarrow \mathbf{R},\  g(A) = |A|$, is the size of the $A \in \mathbf{R}^2$ and the $\mathbf{R}^2$ is the set of all the subsets of $R$. We harness three distinct types of arrays for the testing:
+    \begin{itemize}
+        \item \textit{Sorted Array:} An array \( A \) is said to be in ascending order if for every pair of indices \( i \) and \( j \) such that \( 0 \leq i < j < |A| \), we have \( A[i] \leq A[j] \). Formally, this can be represented as:
+        \[ \forall i, j : 0 \leq i < j < \text{length}(A) \Rightarrow A[i] \leq A[j] \]
+        
+        \item \textit{Sorted Backward Array:} An array \( A \) is in descending order if for every pair of indices \( i \) and \( j \) such that \( 0 \leq i < j < |A| \), we have \( A[i] \geq A[j] \). Formally:
+        \[ \forall i, j : 0 \leq i < j < |A| \Rightarrow A[i] \geq A[j] \]
+        
+        \item \textit{Random Array:} An array \( A \) where the position of elements doesn't follow the constraints of ascending or descending order. The sequence of elements is unpredictable.
+    \end{itemize}
+    
+    \item Let the array length $|A|$ of the any array $A$ described earlier be denoted by \( n \). We start with \( n = 2 \) and increment \( n \) for subsequent tests. This progression can be captured by:
+\[ n \leftarrow n + 1 \]
+
+\item For each array type and length \( n \), let $T_i: \mathbf{N} \rightarrow \mathbf{R}, \ i \in \{QuickSort,\  BubbleSort,\  MergeSort\}$ be the function of the execution time, more precisely  \( T_{\text{QuickSort}}(n) \), \( T_{\text{BubbleSort}}(n) \), and \( T_{\text{MergeSort}}(n) \) represent the execution time of QuickSort, BubbleSort, and MergeSort, respectively.
+
+\item Our objective is to find the smallest length \( n^* \) such that:
+\[ T_{\text{QuickSort}}(n^*) < T_{\text{BubbleSort}}(n^*) \]
+\[ \text{and} \]
+\[ T_{\text{MergeSort}}(n^*) < T_{\text{BubbleSort}}(n^*) \]
+
+\item For reliability, let each sorting test for a specific \( n \) be performed \( k \) times, where \( k \) is a sufficiently large number. The average time for each sort on that \( n \) is then given by:
+\[ \bar{T}_{\text{QuickSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{QuickSort},i}(n) \]
+\[ \bar{T}_{\text{BubbleSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{BubbleSort},i}(n) \]
+\[ \bar{T}_{\text{MergeSort}}(n) = \frac{1}{k} \sum_{i=1}^{k} T_{\text{MergeSort},i}(n) \]
+Where \( T_{\text{QuickSort},i}(n) \), \( T_{\text{BubbleSort},i}(n) \), and \( T_{\text{MergeSort},i}(n) \) are the individual execution times for the \( i^{th} \) test.
+
+\item After determining \( n^* \), we extend our analysis to \( n^* + m \) for some chosen \( m > 0 \). The objective is to analyze the growth behavior of the sorting algorithms. This could be mathematically described as analyzing the function behaviors of \( \bar{T}_{\text{QuickSort}}(n) \), \( \bar{T}_{\text{BubbleSort}}(n) \), and \( \bar{T}_{\text{MergeSort}}(n) \) for \( n > n^* \).
+\end{enumerate}
+
+With the methodology firmly set, the following sections will unfurl the results and delve into a comprehensive analysis.
