@@ -1,3 +1,7 @@
+/**
+ * type for the callback
+ */
+type Callback = (message: string) => void;
 
 /**
  *  Class called AsyncOperationManager. This class should has methods for asynchronous operations with varying delay times.
@@ -9,17 +13,15 @@ export class AsyncOperationManager {
     * @param delay - Time in milliseconds to delay the asynchronous operation.
     * @returns A Promise that resolves to a string message indicating that the asynchronous operation and the subsequent microtask have been executed.
     */
-    simulateAsyncOperation(delay: number) : Promise<string>{
-        return new Promise((resolve) => {
-             // Timer setting wuth the callback: setTimeout implies schedules a callback to be executed after a certain delay
-            setTimeout(() => {
-                // Defining Microtask: Scheduled to execute immediately after the current operation completes
-                process.nextTick(() => {
-                    resolve(`Async operation completed after ${delay}ms and microtask executed.`);
-                });
-                
-            }, delay);
-        });
+    simulateAsyncOperation(delay: number, callback: Callback){
+        // Timer setting wuth the callback: setTimeout implies schedules a callback to be executed after a certain delay
+        setTimeout(() => {
+            // Defining Microtask: Scheduled to execute immediately after the current operation completes
+            process.nextTick(() => {
+                callback(`Async operation completed after ${delay}ms and microtask executed.`);
+            });
+            
+        }, delay);
     }
 
     /**
@@ -27,12 +29,10 @@ export class AsyncOperationManager {
      *
      * @returns A Promise that resolves to a string message indicating that the immediate task has been executed.
      */
-    scheduleImmediate(): Promise<string> {
-        return new Promise((resolve) => {
-            // Checking the state of executing: setImmediate schedules a callback to be executed in this phase
-            setImmediate(() => {
-                resolve('Immediate task executed.');
-            });
+    scheduleImmediate(callback: Callback) {
+        // Checking the state of executing: setImmediate schedules a callback to be executed in this phase
+        setImmediate(() => {
+            callback('Immediate task executed.');
         });
     }
 }
