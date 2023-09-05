@@ -33,3 +33,27 @@ describe('Book class tests', () => {
         expect(book.availability).not.toBeLessThan(0);
     });
 })
+
+describe('User class tests', () => {
+    it('should correctly store user information', () => {
+        const someUserName = "Alexandrina";
+        const someuserEmail = "alexandrina@email.com";
+        const someUserId = "1"
+        const user = new User(someUserName, someuserEmail, someUserId);
+        expect(user.name).toBe(someUserName);
+        expect(user.email).toBe(someuserEmail);
+        expect(user.userID).toBe(someUserId);
+
+    });
+
+    it('should correctly store user information', () => {
+        const someUserName = "Michael";
+        const someuserEmail = "michael@email.com";
+        const someUserId = "2"
+        const user = new User(someUserName, someuserEmail, someUserId);
+        expect(user.name).toBe(someUserName);
+        expect(user.email).toBe(someuserEmail);
+        expect(user.userID).toBe(someUserId);
+    });
+ });
+
