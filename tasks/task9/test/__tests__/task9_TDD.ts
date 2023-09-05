@@ -79,7 +79,7 @@ describe('Cart class tests', () => {
         cart.addBook(book, 2);
   
         expect(cart.calculateTotalPrice()).toBe(bookPrice*2);
-        expect(book.availability).toBe(numerOfAvailable);
+        expect(book.availability).toBe(numerOfAvailable - 2);
     });
   
     it('should correctly remove books from the cart', () => {

@@ -16,7 +16,10 @@ export class Book {
      * @param quantity the quantity of the books
      */
     reduceAvailability(quantity: number) {
-        this.availability -= quantity;
+        
+        this.availability = this.availability - quantity >= 0 ? this.availability - quantity : 0;
+
+    
     }
 }
 
@@ -25,7 +28,7 @@ export class Book {
  * It contains properties like name, email, and a unique user ID.
  */
 export class User {
-    //TODO: constructor and reduceAvailability method
+    //TODO: constructor
 
     constructor(public name: string, 
                 public email: string, 
@@ -50,7 +53,8 @@ export class Cart {
      * @param quantity 
      */
     addBook(book: Book, quantity: number) {
-        
+        this.books.push({ book, quantity });
+        book.reduceAvailability(quantity);
     }
     
 
@@ -59,6 +63,13 @@ export class Cart {
      * @param book the baook to be removed from the cart
      */
     removeBook(book: Book) {
+
+        const index = this.books.findIndex((b) => b.book === book);
+
+        // if only the index is abailable
+        if (index !== -1) {
+            this.books.splice(index, 1);
+        }
        
     }
 
@@ -67,7 +78,7 @@ export class Cart {
      * @returns 
      */
     calculateTotalPrice(): number {
-       return 0;
+        return this.books.reduce((acc, curr) => acc + curr.book.price * curr.quantity, 0);
     }
 }
 
@@ -86,7 +97,7 @@ export class Order {
      * @returns 
      */
     getTotalPrice(): number {
-        return 0;
+        return this.cart.calculateTotalPrice();;
     }
  
 }
