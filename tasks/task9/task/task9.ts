@@ -35,7 +35,8 @@ export class Book {
  * @param query 
  */
 export function searchBooks(query: string): Book[] {
-
+    return booksDB.filter(book => book.title.toLowerCase().includes(query.toLowerCase()) ||
+                                  book.author.toLowerCase().includes(query.toLowerCase()));
 }
 
 
@@ -96,7 +97,7 @@ export class Cart {
     discountCode?: string;
 
     applyDiscount(code: string) {
-      
+        this.discountCode = code;
     }
 
        /**
@@ -104,7 +105,13 @@ export class Cart {
      * @returns 
      */
     calculateTotalPrice(): number {
-        return this.books.reduce((acc, curr) => acc + curr.book.price * curr.quantity, 0);
+        let total = this.books.reduce((acc, curr) => acc + curr.book.price * curr.quantity, 0);
+        
+        if (this.discountCode === 'FunkcjaHOLOMORFICZNA') {
+            total *= 0.9;
+        }
+        
+        return total;
     }
 
     
@@ -120,7 +127,11 @@ export class Cart {
 export class Order {
     // TODO: constructor and getTotalPrice method
 
-    constructor(public user: User, public cart: Cart) {}
+    isPaid: boolean;
+
+    constructor(public user: User, public cart: Cart) {
+        this.isPaid = false;
+    }
 
     /**
      * Method to get the total price of the order
@@ -131,7 +142,12 @@ export class Order {
     }
 
     // TODO: isPaid implementation
- 
+    
+    completeOrder(): boolean {
+        const totalPrice = this.getTotalPrice();
+        this.isPaid = Payment.processPayment(this.user, totalPrice);
+        return this.isPaid;
+    }
 }
 
 
