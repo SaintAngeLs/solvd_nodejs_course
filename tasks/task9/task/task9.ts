@@ -5,6 +5,19 @@
 export class Book {
     //TODO: constructor and reduceAvailability method 
 
+    constructor(public title: string, 
+                public author: string, 
+                public ISBN: string, 
+                public price: number, 
+                public availability: number) {}
+
+    /**
+     * Method to reduce availability when a book is ordered
+     * @param quantity the quantity of the books
+     */
+    reduceAvailability(quantity: number) {
+        this.availability -= quantity;
+    }
 }
 
 /**
@@ -13,6 +26,10 @@ export class Book {
  */
 export class User {
     //TODO: constructor and reduceAvailability method
+
+    constructor(public name: string, 
+                public email: string, 
+                public userID: string) {}
 }
 
   
@@ -22,6 +39,36 @@ export class User {
 */
 export class Cart {
     // TODO: addBook, removeBook, calculateTotalPrice
+
+
+    books: Array<{ book: Book, quantity: number }> = []; 
+
+
+    /**
+     * Method to add books to the cart
+     * @param book the book to be added
+     * @param quantity 
+     */
+    addBook(book: Book, quantity: number) {
+        
+    }
+    
+
+    /**
+     * Method to remove books from the cart
+     * @param book the baook to be removed from the cart
+     */
+    removeBook(book: Book) {
+       
+    }
+
+       /**
+     * Method to calculate the total price of the cart
+     * @returns 
+     */
+    calculateTotalPrice(): number {
+       return 0;
+    }
 }
 
   
@@ -30,7 +77,16 @@ export class Cart {
  * It includes information about the user, books ordered, and the total price.
  */
 export class Order {
-
     // TODO: constructor and getTotalPrice method
+
+    constructor(public user: User, public cart: Cart) {}
+
+    /**
+     * Method to get the total price of the order
+     * @returns 
+     */
+    getTotalPrice(): number {
+        return 0;
+    }
  
 }

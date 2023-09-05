@@ -25,10 +25,10 @@ describe('Book class tests', () => {
         const bookName = "Polimorhic objects and dynamic projecting patterns";
         const bookAuthor = "Alexandrina Poida";
         const bookId = "311415926538598";
-        const bookPrice = "400.99";
+        const bookPrice = 400.99;
         const book = new Book(bookName, bookAuthor, bookId, bookPrice, numerOfAvailable);
         book.reduceAvailability(1);
-        expect(book.acvailability).toBe(numerOfAvailable-1);
+        expect(book.availability).toBe(numerOfAvailable-1);
     })
 
     it('should not allow negative availability', () => {
@@ -70,7 +70,7 @@ describe('Cart class tests', () => {
         const bookName = "Polimorhic objects and dynamic projecting patterns";
         const bookAuthor = "Alexandrina Poida";
         const bookId = "311415926538598";
-        const bookPrice = "400.99";
+        const bookPrice = 400.99;
 
         const book = new Book(bookName, bookAuthor, bookId, bookPrice, numerOfAvailable)
 
@@ -78,7 +78,7 @@ describe('Cart class tests', () => {
 
         cart.addBook(book, 2);
   
-        expect(cart.calculateTotalPrice()).toBe(Number(bookPrice)*2);
+        expect(cart.calculateTotalPrice()).toBe(bookPrice*2);
         expect(book.availability).toBe(numerOfAvailable);
     });
   
@@ -87,7 +87,7 @@ describe('Cart class tests', () => {
         const bookName = "Polimorhic objects and dynamic projecting patterns";
         const bookAuthor = "Alexandrina Poida";
         const bookId = "311415926538598";
-        const bookPrice = "400.99";
+        const bookPrice = 400.99;
 
         const book = new Book(bookName, bookAuthor, bookId, bookPrice, numerOfAvailable);
 
@@ -115,7 +115,7 @@ describe('Order class tests', () => {
         const bookName = "Polimorhic objects and dynamic projecting patterns";
         const bookAuthor = "Alexandrina Poida";
         const bookId = "311415926538598";
-        const bookPrice = "400.99";
+        const bookPrice = 400.99;
 
         const book = new Book(bookName, bookAuthor, bookId, bookPrice, numerOfAvailable);
 
@@ -124,7 +124,7 @@ describe('Order class tests', () => {
   
         const order = new Order(user, cart);
   
-        expect(order.getTotalPrice()).toBe(Number(bookPrice));
+        expect(order.getTotalPrice()).toBe(bookPrice);
     });
   });
   
