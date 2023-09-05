@@ -1,5 +1,5 @@
 import {
-    Book, User, Cart, Order
+    Book, User, Cart, Order, searchBooks, Payment, booksDB, usersDB 
 } from '../../task/task9';
 
 describe('Book class tests', () => {
@@ -126,5 +126,82 @@ describe('Order class tests', () => {
   
         expect(order.getTotalPrice()).toBe(bookPrice);
     });
-  });
+});
+
+
+// BONUS TESTS:
+
+
   
+describe('Extended Features', () => {
+
+    beforeEach(() => {
+        // Clear the database and repopulate it before each test
+        booksDB.length = 0;
+        usersDB.length = 0;
+
+        const bookName = "Polymorphic Objects and Dynamic Projecting Patterns";
+        const bookAuthor = "Alexandrina Poida";
+        const bookId = "311415926538598";
+        const bookPrice = 400.99;
+        const availability = 10;
+
+        const book1 = new Book(bookName, bookAuthor, bookId, bookPrice, availability);
+
+        const bookName2 = "Unordered subspaces of differencial systems solutions";
+        const bookAuthor2 = "Andrii Voznesenskyi";
+        const bookId2 = "895835629514113";
+        const bookPrice2 = 300.99;
+        const availability2 = 10;
+
+        const book2= new Book(bookName2, bookAuthor2, bookId2, bookPrice2, availability2);
+
+        booksDB.push(book1);
+
+        booksDB.push(book2);
+
+
+        const someUserName = "Michael";
+        const someuserEmail = "michael@email.com";
+        const someUserId = "2";
+        const user = new User(someUserName, someuserEmail, someUserId);
+
+        usersDB.push(user);
+    });
+
+    it('should search books correctly', () => {
+        const searchResults = searchBooks("differencial");
+        expect(searchResults.length).toBe(1);
+        expect(searchResults[0].title).toBe("Unordered subspaces of differencial systems solutions");
+    });
+
+    it('should apply discount correctly', () => {
+        const cart = new Cart();
+        cart.addBook(booksDB[0], 1);
+        cart.applyDiscount('FunkcjaHOLOMORFICZNA');
+        expect(cart.calculateTotalPrice()).toBeCloseTo(400.99 * 0.9);
+    });
+
+    it('should handle payment correctly', () => {
+        const user = new User("Pawel Keller", "keller@email.com", "3");
+        const cart = new Cart();
+        cart.addBook(booksDB[0], 1);
+        const order = new Order(user, cart);
+        
+        const paymentStatus = Payment.processPayment(user, cart.calculateTotalPrice());
+        
+        expect(paymentStatus).toBe(true);
+    });
+
+    it('should complete order correctly', () => {
+        const user = new User("Keller Pawel", "keller@email.com", "3");
+        const cart = new Cart();
+        cart.addBook(booksDB[0], 1);
+        const order = new Order(user, cart);
+        
+        const isOrderComplete = order.completeOrder();
+        
+        expect(isOrderComplete).toBe(true);
+        expect(order.isPaid).toBe(true);
+    });
+});

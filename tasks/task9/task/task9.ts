@@ -1,7 +1,13 @@
+// Funny-Dummy Databases :/
+export const booksDB: Book[] = [];
+export const usersDB: User[] = [];
+
+
 /**
  * Class representing an individual Book.
  * It contains properties like title, author, ISBN, price, and availability.
  */
+
 export class Book {
     //TODO: constructor and reduceAvailability method 
 
@@ -22,6 +28,18 @@ export class Book {
     
     }
 }
+
+// TODO: Searching for the book method
+/**
+ * 
+ * @param query 
+ */
+export function searchBooks(query: string): Book[] {
+
+}
+
+
+
 
 /**
  * Class representing a User.
@@ -73,6 +91,14 @@ export class Cart {
        
     }
 
+    // TODO:
+
+    discountCode?: string;
+
+    applyDiscount(code: string) {
+      
+    }
+
        /**
      * Method to calculate the total price of the cart
      * @returns 
@@ -80,6 +106,10 @@ export class Cart {
     calculateTotalPrice(): number {
         return this.books.reduce((acc, curr) => acc + curr.book.price * curr.quantity, 0);
     }
+
+    
+
+  
 }
 
   
@@ -99,5 +129,20 @@ export class Order {
     getTotalPrice(): number {
         return this.cart.calculateTotalPrice();;
     }
+
+    // TODO: isPaid implementation
  
+}
+
+
+/**
+ * Payment handling class
+ */
+export class Payment {
+    // TODO: assume that the payment is always sucessfull
+
+    static processPayment(user: User, amount: number): boolean {
+        // some webhooks-stripe-paypasll mechanizm is like a one line string here :)))))))
+        return true;
+    }
 }
