@@ -53,12 +53,18 @@ export class NonFictionBook extends Book {
 
 // TODO: Searching for the book method
 /**
- * 
- * @param query 
+ * Search for books by title, author, or genre.
+ * Returns a maximum of 10 results.
+ * @param query the search term
  */
 export function searchBooks(query: string): Book[] {
-    return booksDB.filter(book => book.title.toLowerCase().includes(query.toLowerCase()) ||
-                                  book.author.toLowerCase().includes(query.toLowerCase()));
+
+    const normalizedQuery = query.toLowerCase();
+
+    return booksDB.filter(book => book.title.toLowerCase().includes(normalizedQuery)  ||
+                                  book.author.toLowerCase().includes(normalizedQuery) ||
+                                  (book as FictionBook).genre?.toLowerCase().includes(normalizedQuery) ||
+                                  (book as NonFictionBook).subject?.toLowerCase().includes(normalizedQuery));
 }
 
 
