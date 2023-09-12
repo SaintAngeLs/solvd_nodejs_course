@@ -31,6 +31,20 @@ export class Book {
 
 // TODO: fictionBook and nonFiction book classes: extensional classes of the Book
 
+export class FictionBook extends Book {
+    constructor(title: string, author: string, ISBN: string, price: number, availability: number, public genre : string)
+    {
+        super(title, author, ISBN, price, availability);
+    }
+}
+
+export class NonFictionBook extends Book {
+    constructor(title: string, author: string, ISBN: string, price: number, availability: number, public subject : string)
+    {
+        super(title, author, ISBN, price, availability);
+    }
+}
+
 // TODO: Searching for the book method
 /**
  * 
