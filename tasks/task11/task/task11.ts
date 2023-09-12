@@ -501,10 +501,10 @@ export class Graph {
         }
     }
 
-    addEdge(v1: number, v2: number) 
+    addEdge(v1: number, v2: number, weight: number = 1) 
     {
-        this.matrix[v1][v2] = 1;
-        this.matrix[v2][v1] = 1;
+        this.matrix[v1][v2] = weight;
+        this.matrix[v2][v1] = weight;
     }
 
     DFS(start: number) 
@@ -529,54 +529,68 @@ export class Graph {
         }
     }
 
-    BFS(start: number): number[] 
-    {
+
+
+    BFS(start: number, end: number): number[] {
         const visited = new Array(this.nodes).fill(false);
-        const result: number[] = [];
         const queue: number[] = [];
+        const prev = new Array(this.nodes).fill(-1);
+        
         visited[start] = true;
         queue.push(start);
 
-        while (queue.length) 
-        {
+        while (queue.length) {
             const vertex = queue.shift()!;
-            result.push(vertex);
             
-            for (let i = 0; i < this.nodes; i++) 
-            {
-                if (this.matrix[vertex][i] && !visited[i]) 
-                {
+            if (vertex === end) {
+                return this.constructPath(prev, start, end);
+            }
+
+            for (let i = 0; i < this.nodes; i++) {
+                if (this.matrix[vertex][i] && !visited[i]) {
+                    prev[i] = vertex;
                     visited[i] = true;
                     queue.push(i);
                 }
             }
         }
-        return result;
+        return [];
     }
 
-    dijkstra(start: number): number[] {
+    dijkstra(start: number, end: number): number[] {
         const distances = new Array(this.nodes).fill(Infinity);
         const processed = new Array(this.nodes).fill(false);
+        const prev = new Array(this.nodes).fill(-1);
 
         distances[start] = 0;
 
-        for (let i = 0; i < this.nodes - 1; i++) 
-        {
+        for (let i = 0; i < this.nodes - 1; i++) {
             const u = this.minDistance(distances, processed);
             processed[u] = true;
 
-            for (let v = 0; v < this.nodes; v++) 
-            {
-                if (!processed[v] &&
-                    this.matrix[u][v] !== 0 &&
-                    distances[u] !== Infinity &&
-                    distances[u] + this.matrix[u][v] < distances[v]) 
-                {
+            if (u === end) {
+                return this.constructPath(prev, start, end);
+            }
+
+            for (let v = 0; v < this.nodes; v++) {
+                if (!processed[v] && this.matrix[u][v] !== 0 && distances[u] !== Infinity && distances[u] + this.matrix[u][v] < distances[v]) {
                     distances[v] = distances[u] + this.matrix[u][v];
+                    prev[v] = u;
                 }
             }
         }
-        return distances;
+
+        return this.constructPath(prev, start, end);
+    }
+
+    private constructPath(prev: number[], start: number, end: number): number[] {
+        const path: number[] = [];
+        for (let at = end; at !== -1; at = prev[at]) {
+            path.push(at);
+        }
+        path.reverse();
+        if (path[0] === start) return path;
+        return [];
     }
 
     private minDistance(distances: number[], processed: boolean[]): number 
@@ -593,5 +607,254 @@ export class Graph {
             }
         }
         return minIndex;
+    }
+}
+
+
+/**
+ *  RB trees properties that are used in the followind implementation:
+ *  Every node is either red or black.
+    The root node is black.
+    All leaves (NIL) are black.
+    If a red node has children then, the children are always black.
+    Every path from a node to its descendant NIL nodes has the same number of black nodes.
+ */
+
+/**
+ * Represents a node in a Red-Black Tree.
+ */
+export class RBNode {
+    data: number;
+    parent: RBNode | null;
+    left: RBNode;
+    right: RBNode;
+    color: number;  // 1 for red, 0 for black
+
+    constructor(data: number) 
+    {
+        this.data = data;
+        this.parent = null;
+        this.left = NIL_LEAF;
+        this.right = NIL_LEAF;
+        this.color = 1;
+    }
+}
+
+/** Sentinel node to represent the NIL leaves */
+export const NIL_LEAF: RBNode = new RBNode(-1);  // Sentinel node
+NIL_LEAF.color = 0;
+NIL_LEAF.left = NIL_LEAF;
+NIL_LEAF.right = NIL_LEAF;
+
+/**
+ * Represents a Red-Black Tree data structure.
+ */
+export class RedBlackTree {
+    root: RBNode;
+
+    constructor() 
+    {
+        this.root = NIL_LEAF;
+    }
+
+    /**
+     * Inserts a new node into the tree and ensures it remains balanced.
+     * @param key - The value to be added.
+     */
+    insert(key: number) 
+    {
+        let node: RBNode = new RBNode(key);
+        this.insertNode(node);
+        this.fixInsert(node);
+    }
+
+    private insertNode(node: RBNode) 
+    {
+        let y: RBNode | null = null;
+        let x: RBNode = this.root;
+
+        while (x !== NIL_LEAF) 
+        {
+            y = x;
+            if (node.data < x.data) 
+            {
+                x = x.left;
+            } 
+            else 
+            {
+                x = x.right;
+            }
+        }
+
+        node.parent = y;
+        if (!y) 
+        {
+            this.root = node;
+        } 
+        else if (node.data < y.data) 
+        {
+            y.left = node;
+        } 
+        else 
+        {
+            y.right = node;
+        }
+
+        if (!node.parent) 
+        {
+            node.color = 0;
+            return;
+        }
+
+        if (!node.parent.parent) 
+        {
+            return;
+        }
+
+        if (node.parent && node.parent.parent) 
+        {
+            return;
+        }
+    }
+
+    private fixInsert(node: RBNode) 
+    {
+        let uncle: RBNode;
+
+        while (node.parent && node.parent.color === 1)
+        {
+            const parent = node.parent;
+            const grandParent = parent.parent;
+    
+            if (!grandParent) break;  // ensure grandparent exists
+    
+            if (parent === grandParent.left) 
+            {
+                uncle = grandParent.right;
+    
+                if (uncle.color === 1) 
+                {
+                    // Case 1: Uncle is red
+                    parent.color = 0;
+                    uncle.color = 0;
+                    grandParent.color = 1;
+                    node = grandParent;
+                } 
+                else 
+                {
+                    if (node === parent.right) 
+                    {
+                        // Case 2: Node is a right child
+                        node = parent;
+                        this.rotateLeft(node);
+                    }
+                    // Case 3: Node is a left child
+                    parent.color = 0;
+                    grandParent.color = 1;
+                    this.rotateRight(grandParent);
+                }
+            } 
+            else 
+            {
+                uncle = grandParent.left;
+    
+                if (uncle.color === 1) 
+                {
+                    // Mirror Case 1: Uncle is red
+                    parent.color = 0;
+                    uncle.color = 0;
+                    grandParent.color = 1;
+                    node = grandParent;
+                } 
+                else 
+                {
+                    if (node === parent.left) 
+                    {
+                        // Mirror Case 2: Node is a left child
+                        node = parent;
+                        this.rotateRight(node);
+                    }
+                    // Mirror Case 3: Node is a right child
+                    parent.color = 0;
+                    grandParent.color = 1;
+                    this.rotateLeft(grandParent);
+                }
+            }
+        }
+        this.root.color = 0;
+    }
+
+    private rotateLeft(x: RBNode) 
+    {
+        let y: RBNode = x.right;
+        x.right = y.left;
+        if (y.left !== NIL_LEAF) 
+        {
+            y.left.parent = x;
+        }
+        y.parent = x.parent;
+        if (!x.parent) 
+        {
+            this.root = y;
+        } 
+        else if (x === x.parent.left) 
+        {
+            x.parent.left = y;
+        } 
+        else 
+        {
+            x.parent.right = y;
+        }
+        y.left = x;
+        x.parent = y;
+    }
+
+    private rotateRight(x: RBNode) 
+    {
+        let y: RBNode = x.left;
+        x.left = y.right;
+        if (y.right !== NIL_LEAF) 
+        {
+            y.right.parent = x;
+        }
+        y.parent = x.parent;
+        if (!x.parent) 
+        {
+            this.root = y;
+        } 
+        else if (x === x.parent.right) 
+        {
+            x.parent.right = y;
+        } 
+        else 
+        {
+            x.parent.left = y;
+        }
+        y.right = x;
+        x.parent = y;
+    }
+
+    /**
+     * Searches for a node with the given value.
+     * @param key - The value to be searched.
+     * @returns - The node if found, or the sentinel NIL node.
+     */
+    search(key: number): RBNode 
+    {
+        return this.searchTree(this.root, key);
+    }
+
+    private searchTree(node: RBNode, key: number): RBNode 
+    {
+        if (node === NIL_LEAF || key === node.data) 
+        {
+            return node;
+        }
+
+        if (key < node.data) 
+        {
+            return this.searchTree(node.left, key);
+        }
+        return this.searchTree(node.right, key);
     }
 }
