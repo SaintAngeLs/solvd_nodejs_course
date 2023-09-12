@@ -29,6 +29,8 @@ export class Book {
     }
 }
 
+// TODO: fictionBook and nonFiction book classes: extensional classes of the Book
+
 // TODO: Searching for the book method
 /**
  * 
