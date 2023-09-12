@@ -31,6 +31,9 @@ export class Book {
 
 // TODO: fictionBook and nonFiction book classes: extensional classes of the Book
 
+/**
+ * Fiction book extentional class of the Book Cass adding the genre field to the initializing list in the constructor
+ */
 export class FictionBook extends Book {
     constructor(title: string, author: string, ISBN: string, price: number, availability: number, public genre : string)
     {
@@ -38,6 +41,9 @@ export class FictionBook extends Book {
     }
 }
 
+/**
+ * NonFuctionBook extentional class of the Book main class adding the value of the subject of the Book to the parameters of the initializing list
+ */
 export class NonFictionBook extends Book {
     constructor(title: string, author: string, ISBN: string, price: number, availability: number, public subject : string)
     {

@@ -1,5 +1,5 @@
 import {
-    Book, User, Cart, Order, searchBooks, Payment, booksDB, usersDB 
+    Book, User, Cart, Order, searchBooks, Payment, booksDB, usersDB, NonFictionBook, FictionBook 
 } from '../../task/task10';
 
 describe('Book class tests', () => {
@@ -207,3 +207,51 @@ describe('Extended Features', () => {
 });
 
 // TODO: Polymorphism demonstration tests
+
+describe('Polymorphism of the Book Class:', () => {
+    it('Should treat the Fiction and NonFiction books uniformely in time they are added to the cart', () => {
+        const bookName = "Polymorphic Objects and Dynamic Projecting Patterns";
+        const bookAuthor = "Alexandrina Poida";
+        const bookId = "311415926538598";
+        const bookPrice = 400.99;
+        const availability = 10;
+
+        const nonFictionBook = new NonFictionBook(bookName, bookAuthor, bookId, bookPrice, availability, "Science");
+
+        const fictionBook = new FictionBook("My favourite sputnik", "Haruki Murakami", "54321", 300, 5, "Novel");
+        
+        const cart = new Cart();
+
+        const expectedCalculatedPrice = bookPrice + 300;
+
+        cart.addBook(fictionBook, 1);
+        cart.addBook(nonFictionBook, 1);
+        
+        expect(cart.books.length).toBe(2);
+        expect(cart.calculateTotalPrice()).toBe(expectedCalculatedPrice);
+    });
+
+    it('should allow search function on the derived from the inherrit class properties', () => {
+        const bookName = "Polymorphic Objects and Dynamic Projecting Patterns";
+        const bookAuthor = "Jan Kowalski";
+        const bookId = "311415926538598";
+        const bookPrice = 400.99;
+        const availability = 10;
+
+        const nonFictionBook = new NonFictionBook(bookName, bookAuthor, bookId, bookPrice, availability, "Science");
+
+        const fictionBook = new FictionBook("My favourite sputnik", "Haruki Murakami", "54321", 300, 5, "Novel");
+
+        booksDB.length = 0;
+        usersDB.length = 0;
+        
+        booksDB.push(fictionBook);
+        booksDB.push(nonFictionBook);
+
+        const searchResults = searchBooks("Science");
+
+        expect(searchResults.length).toBe(1);
+        expect(searchResults[0].title).toBe("Polymorphic Objects and Dynamic Projecting Patterns");
+    });
+
+});
