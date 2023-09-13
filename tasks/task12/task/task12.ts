@@ -108,3 +108,33 @@ export class HashTable {
         }
     }
 }
+
+/**
+ * Hash Table Analysis:
+ * The hash table uses separate chaining as a collision resolution technique. Separate chaining
+ * involves using a linked list for each slot of the hash table to hold the key-value pairs.
+ * This approach makes the table more resilient to collisions but adds overhead due to the linked list.
+ *
+ * Performance Analysis:
+ * 1. Insertion:
+ *    - Best Case: O(1) - If there's no collision at the computed hash.
+ *    - Worst Case: O(n) - If all keys produce the same hash and get appended to the end of the same linked list.
+ *    - Average Case(amortized complexity): O(1) given a good distribution of keys.
+ *
+ * 2. Retrieval:
+ *    - Best Case: O(1) - If the key is at the start of the linked list or no collision.
+ *    - Worst Case: O(n) - If the key is at the end of a long linked list.
+ *    - Avarage Case(amortized complexity): O(1) with a well-distributed hash function.
+ *
+ * 3. Deletion:
+ *    - Best Case: O(1) - If the key is at the start of the linked list or no collision.
+ *    - Worst Case: O(n) - If the key is at the end of a long linked list.
+ *    - Average Case(amortized complexity): O(1) with a well-distributed hash function.
+ *
+ * Trade-offs:
+ * - Using the separate chaining approach ensures that our hash table can handle collisions gracefully,
+ *   but there's added memory overhead due to the linked list.
+ * - Our hash function is more complex than simple hash functions, which might add a slight overhead
+ *   but helps in producing a more uniform distribution of keys.
+ * - Resizing the hash table isn't implemented. If the table grows large, performance could degrade due to long linked lists.
+ */

@@ -33,3 +33,18 @@ export function customHashFunction(key: string, tableSize: number): number {
 
     return hash % tableSize;
 }
+
+
+/**
+ * Custom Hash Function:
+ *
+ * Our custom hash function makes use of three prime numbers, which help in distributing
+ * hash values more uniformly over the table. This should, in theory, reduce the number of
+ * collisions and improve performance.
+ *
+ * The hash function is constructed using three helper functions, each performing different
+ * mathematical and bitwise operations on the input. Combining these techniques aims to provide
+ * a robust and fairly unpredictable hashing mechanism.
+ *
+
+ */
