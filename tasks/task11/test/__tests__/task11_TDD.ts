@@ -405,7 +405,7 @@ describe('Graph class', () => {
         });
     });
 
-    describe('BFS', () => {
+    describe(' BFS szefa ', () => {
         let graph: Graph;
 
         beforeEach(() => {
@@ -422,8 +422,51 @@ describe('Graph class', () => {
         it('should traverse graph using BFS correctly', () => {
             expect(graph.BFS(0, 3)).toEqual([0, 1, 2, 3]);
         });
+
+        describe('===================== BFS szefa =====================', () => {
+            let graph: Graph;
+            const SIZE = 1000;
+            const SUBGRAPH_SIZE = 900; // First 900 vertices are densely connected
+        
+            beforeEach(() => {
+                graph = new Graph();
+        
+                // Adding vertices
+                for (let i = 0; i < SIZE; i++) {
+                    graph.addVertex();
+                }
+        
+                // Connecting first 900 vertices densely
+                for (let i = 0; i < SUBGRAPH_SIZE; i++) {
+                    for (let j = i + 1; j < SUBGRAPH_SIZE; j++) {
+                        graph.addEdge(i, j);
+                    }
+                }
+        
+                // Connecting last 100 vertices densely among themselves
+                for (let i = SUBGRAPH_SIZE; i < SIZE; i++) {
+                    for (let j = i + 1; j < SIZE; j++) {
+                        graph.addEdge(i, j);
+                    }
+                }
+            });
+        
+            it('BFS should not traverse to the disconnected subgraph', () => {
+                const result = graph.BFS(0, SIZE - 1);
+                // Since 0 and SIZE-1 belong to different subgraphs, BFS should not find a path
+                expect(result).toEqual([]); // Assuming BFS returns undefined if no path is found.
+            });
+        
+            it('BFS should traverse within a connected subgraph', () => {
+                const result = graph.BFS(0, SUBGRAPH_SIZE - 1);
+                // Assuming shortest path is returned, in a dense graph with equal weights, BFS should find the direct path
+                expect(result).toEqual([0, SUBGRAPH_SIZE - 1]);
+            });
+        });
+    
     });
 
+    
     describe('Dijkstra Algorithm', () => {
         let graph: Graph;
 
@@ -443,6 +486,34 @@ describe('Graph class', () => {
             expect(graph.dijkstra(0, 3)).toEqual([0, 1, 2, 3]);
         });
     });
+    describe('===================== Dijkstra szefa =====================', () => {
+        let graph: Graph;
+        const SIZE = 10000;
+    
+        beforeEach(() => {
+            graph = new Graph();
+    
+            // Adding vertices
+            for (let i = 0; i < SIZE; i++) {
+                graph.addVertex();
+            }
+    
+            // Making it dense
+            for (let i = 0; i < SIZE; i++) {
+                for (let j = i+1; j < SIZE; j++) {
+                    graph.addEdge(i, j);
+                    // Optionally add weights here. If not, it implies equal cost.
+                }
+            }
+        });
+    
+        it('should handle large dense graphs using Dijkstra algorithm', () => {
+            const result = graph.dijkstra(0, SIZE - 1);
+            // For a dense graph, the shortest path from 0 to SIZE-1 should be a direct path if all weights are equal
+            expect(result).toEqual([0, SIZE - 1]);
+        });
+    });
+    
 
 });
 
