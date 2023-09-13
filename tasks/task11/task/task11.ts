@@ -668,6 +668,13 @@ export class RedBlackTree {
         this.fixInsert(node);
     }
 
+    /**
+     * Inserts a node into the Red-Black Tree.
+     * This method is an implementation of the standard binary tree insertion,
+     * followed by the call to fix any violations of the RBTree properties.
+     * 
+     * @param node - The RBNode to be inserted.
+     */
     private insertNode(node: RBNode) 
     {
         let y: RBNode | null = null;
@@ -717,6 +724,14 @@ export class RedBlackTree {
         }
     }
 
+
+    /**
+     * Fixes the tree after the insertion of a node.
+     * If the red-black tree properties are violated due to the insertion,
+     * this method restores those properties through rotations and color changes.
+     * 
+     * @param node - The RBNode recently inserted.
+     */
     private fixInsert(node: RBNode) 
     {
         let uncle: RBNode;
@@ -784,6 +799,36 @@ export class RedBlackTree {
         this.root.color = 0;
     }
 
+    // The idea originnaly was from the B-trees and 2-3-4 HV as their 
+    // derivatives but insted of changing the changing the pointers type
+    // by bijection between all the 2-3-4 to the RB and form the 2-3-4 to the AVL
+    // to perform the balanging and than transforming throught the bijection back 
+    // the rotation is performd on the RB
+
+    /**
+     * Performs a left rotation on the provided node.
+     * Left rotations are used to preserve the balancing properties of a Red-Black Tree.
+     *
+     * Example:
+     * Before:
+     *     x
+     *      \
+     *       y
+     *      / \
+     *     T2  z
+     * 
+     * After:
+     *       y
+     *      / \
+     *     x   z
+     *      \
+     *      T2
+     * 
+     * Here, the node `y` becomes the new parent node, and `x` becomes its left child.
+     * The subtree `T2` moves from being the left child of `y` to the right child of `x`.
+     *
+     * @param x - The node on which to perform the left rotation.
+     */
     private rotateLeft(x: RBNode) 
     {
         let y: RBNode = x.right;
@@ -809,6 +854,30 @@ export class RedBlackTree {
         x.parent = y;
     }
 
+    /**
+     * Performs a right rotation on the provided node.
+     * Right rotations are used to preserve the balancing properties of a Red-Black Tree.
+     *
+     * Example:
+     * Before:
+     *       x
+     *      /
+     *     y
+     *    / \
+     *   z   T2
+     * 
+     * After:
+     *     y
+     *    / \
+     *   z   x
+     *        /
+     *       T2
+     * 
+     * Here, the node `y` becomes the new parent node, and `x` becomes its right child.
+     * The subtree `T2` moves from being the right child of `y` to the left child of `x`.
+     *
+     * @param x - The node on which to perform the right rotation.
+     */
     private rotateRight(x: RBNode) 
     {
         let y: RBNode = x.left;
@@ -850,6 +919,9 @@ export class RedBlackTree {
         {
             return node;
         }
+
+        // Search as the binary search tree(with the respect to the properties) 
+        // implying the worst case of the O(n)
 
         if (key < node.data) 
         {

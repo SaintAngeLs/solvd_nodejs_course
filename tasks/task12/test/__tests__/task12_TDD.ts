@@ -9,7 +9,7 @@
  */
 
 import { customHashFunction } from "../../task/hashingFunction";
-import { HashTable, TABLE_SIZE } from "../../task/task12";
+import { EnhancedHashTable, HashTable, INITIAL_SIZE, TABLE_SIZE } from "../../task/task12";
 
 describe('HashTable', () => {
 
@@ -77,4 +77,42 @@ describe('HashTable', () => {
     });
 
 
+});
+
+
+// Additional function fotr the hashing table with the resizing
+describe('EnhancedHashTable', () => {
+    let hashTable: EnhancedHashTable;
+
+    beforeEach(() => {
+        hashTable = new EnhancedHashTable();
+    });
+
+    test('should insert and retrieve a value', () => {
+        hashTable.insert('key1', 'value1');
+        expect(hashTable.get('key1')).toBe('value1');
+    });
+
+    test('should handle collisions and resize when needed', () => {
+        const size = INITIAL_SIZE;
+        for (let i = 0; i < size; i++) {
+            hashTable.insert(`key${i}`, `value${i}`);
+        }
+
+        // Trigger resizing
+        hashTable.insert('extraKey', 'extraValue');
+
+        expect(hashTable.get('extraKey')).toBe('extraValue');
+    });
+
+    test('should iterate over entries', () => {
+        hashTable.insert('key1', 'value1');
+        hashTable.insert('key2', 'value2');
+        const entries = [...hashTable.entries()];
+
+        expect(entries).toEqual([
+            { key: 'key1', value: 'value1' },
+            { key: 'key2', value: 'value2' }
+        ]);
+    });
 });
