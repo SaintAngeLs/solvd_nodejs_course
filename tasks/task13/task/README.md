@@ -1,41 +1,85 @@
-## myJSONParse Function
+## Table of Contents
 
-**Purpose**: The `myJSONParse` function is designed to parse a string into a JavaScript object. It is similar in purpose to the built-in JSON.parse() method, but implemented for learning and illustrative purposes.
+1. [General Task Description and Key Points](#general-task-description-and-key-points)
+   1.1. [JSON Syntax Understanding](#json-syntax-understanding)
+   1.2. [Parsing Rules](#parsing-rules)
 
-### Parameters
+2. [JSON Parser Implementation](#json-parser-implementation)
+   2.1. [Tokenization](#tokenization)
+      - [str_serializer Function](#str_serializer-function)
+   2.2. [Parsing](#parsing)
+      - [JSON.parse Function](#jsonparse-function)
+   2.3. [Error Handling](#error-handling)
+   2.4. [Testing](#testing)
 
-- `input` (string): The input string that represents a JSON-like structure.
+3. [Documentation & Reflection](#documentation--reflection)
+   3.1. [Documentation](#documentation)
+   3.2. [Reflection](#reflection)
 
-### Returns
+4. [A brief implementation :: Custom JSON Polyfill](#a-brief-implementation-::-custom-json-polyfill)
 
-- `any`: Returns a JavaScript object, array, string, number, boolean, or null based on the input string.
+5. [Usage](#usage)
 
-### Usage
 
-```javascript
-const obj = myJSONParse("{\"name\":\"John\"}");
-console.log(obj.name); // Outputs: John
+## General task description and some points outs
+1. JSON Syntax 
+1.1. JSON syntax understanding
+1.2. Parsing Rules
 
-### Analysis
+2. JSON parser implementation
+2.1 Tokenization
+The `str_serializer` function is a custom serializer that takes an object or primitive type element value and converts it to a JSON-like string representation. It employs a non-recursive (iterative) approach using a custom stack data structure to handle nested objects and arrays. This helps avoid stack overflow errors, especially with deep objects. It follows specific rules for serializing different data types and handles custom replacers.
+2.2 Parsing
+The `JSON.parse` function parses a JSON-like string and converts it into a JavaScript object. It uses a `walk` function to traverse the object and handle any reviver functions if provided. It also checks the validity of the JSON string using regex and then parses it.
+2.3 Error handling
+Error handling is implemented to catch syntax errors and other issues during JSON parsing. If the input string is not valid JSON, a `SyntaxError` is thrown.
+2.4 Testing
 
- - myJSONParse(input: string): any: This is the main function. It contains a series of condition checks using helper functions (isInvalidInput, isBooleanOrNull, isString, isArray, isObject). If a condition is satisfied, the corresponding parsing function or conversion function is called. Noticeably, within the parseArray and parseObject functions, myJSONParse is invoked again, indicating recursion.
+3. Documentaiton && reflection
+3.1 Documentation
+3.2 Reflection
 
- - isInvalidInput(input: string): boolean: It simply checks for invalid characters using a regex match. No recursion.
 
- - isBooleanOrNull(input: string): boolean: It checks if the input is a "null", "true", or "false". No recursion.
+# A brief implementation :: Custom JSON Polyfill
 
- - convertToBooleanOrNull(input: string): boolean | null: Converts the input to its corresponding boolean value or null. No recursion.
+## Overview
 
- - isString(input: string): boolean: Uses regex to check if the input is a string. No recursion.
+This module provides a polyfill for native JSON objects, ensuring that environments without native JSON support can still access JSON serialization and deserialization functionalities. It includes various features and utility functions.
 
- - extractStringContent(input: string): string: Extracts the inner content of a string. No recursion.
+## Features
 
- - isArray(input: string): boolean: Uses regex to check if the input is an array. No recursion.
+### Type Extensions (Global Type Extensions)
 
- - isObject(input: string): boolean: Uses regex to check if the input is an object. No recursion.
+- Extends basic JavaScript types (`String`, `Number`, `Boolean`) with a `toJSON` method via declaration merging.
 
- - customSplit(str: string, delimiter: string): string[]: This function splits a string by a delimiter, respecting nested structures. No recursion.
+### Custom JSON Object (`CustomJSON`)
 
- - parseArray(input: string): any[]: This function parses an array. Inside, it uses the customSplit function to split the content by commas and then maps through each split content, invoking the myJSONParse function for each. This introduces recursion because myJSONParse calls parseArray and vice versa.
+- Provides an encapsulated object that mimics the native JSON object.
+- Includes polyfills for `stringify` and `parse` methods.
+- Implements utility functions and regex patterns to support main functionalities:
+   - `stringRepNum(n)`: Formats numbers for date serialization.
+   - `quote(string)`: Escapes special characters in strings for JSON representation.
+   - `str(key, holder)`: Recursive function for converting JavaScript values to JSON counterparts.
 
- - parseObject(input: string): { [key: string]: any }: Parses the input as an object. It uses the customSplit function to break down the input and then processes each key-value pair. Within this loop, it calls myJSONParse for both the key and value. This also introduces recursion because myJSONParse calls parseObject and vice versa.
+### Constants
+
+- Regular expression patterns to match specific Unicode characters requiring special handling during serialization.
+- Regular expression pattern to identify characters necessitating escape sequences in JSON strings.
+
+### Additional Implementations
+
+- Initializes the JSON object if it doesn't exist or isn't of type 'object'.
+- Extends `Date` objects with a `toJSON` function to convert dates into a standardized string format or throw errors for invalid dates.
+- Extends basic types like `String`, `Number`, and `Boolean` with a `toJSON` function if they don't possess one.
+- Enhances stringification to handle special Unicode characters and escape sequences.
+- Provides custom JSON string parsing with error checks against malicious or poorly formed JSON strings.
+
+## Usage
+
+This polyfill ensures compatibility with environments lacking native JSON support, making it easier to work with JSON data in various contexts. Simply import the `CustomJSON` object and use its `stringify` and `parse` methods as you would with native JSON.
+
+to run the development tetst:
+```bash
+npm test task13_TDD
+```
+or in the root directory there are also some importand script sh enabling rest running a bit faster

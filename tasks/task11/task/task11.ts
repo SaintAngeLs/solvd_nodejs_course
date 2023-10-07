@@ -620,6 +620,17 @@ export class Graph {
     Every path from a node to its descendant NIL nodes has the same number of black nodes.
  */
 
+    /** Sentinel node */
+
+export const NIL_LEAF: RBNode = {
+    data: -1,
+    parent: null,
+    left: null as any,  // we'll assign this later
+    right: null as any, // we'll assign this later
+    color: 0            // black
+};
+
+
 /**
  * Represents a node in a Red-Black Tree.
  */
@@ -641,7 +652,7 @@ export class RBNode {
 }
 
 /** Sentinel node to represent the NIL leaves */
-export const NIL_LEAF: RBNode = new RBNode(-1);  // Sentinel node
+
 NIL_LEAF.color = 0;
 NIL_LEAF.left = NIL_LEAF;
 NIL_LEAF.right = NIL_LEAF;

@@ -33,10 +33,16 @@ This section was left blue with the direct author's intention
 
 The task implementation and the brief specification description (fullversion prepared for doxygen will be conducted far a bit latere) is inside the tasks directory, where it is also possible to find the testing set, results of which are printed in the table of the UI.
 
-## Development Plan
-Here are the main features included in the project:
+## Some cocistency about the test running:
 
-- [x] User Interface developed with Next.js
-- [ ] Connection to Judge0 API
-- [ ] Mailer service for sending code results
-- [ ] Future improvements and additions
+Script test_run.sh is responsible of the development test running to make the life of the reviewer more interesting.
+To anable the script run
+```bash
+cat test_run.sh # to be sure ther is not unsave state for the checker's equiupment
+```
+```bash
+sudo chmod +x ./test_run.sh # add the ability for the execution
+```
+```bash
+./test_run.sh i # , where i is the numbe of the specific task
+```

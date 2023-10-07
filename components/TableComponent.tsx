@@ -3,12 +3,14 @@ import { runTestsTask2 } from '@/tasks/task2/test/task2_test';
 import { runTestsTask3 } from '@/tasks/task3/test/task3_test';
 import { performanceTest as runTestsTask7} from '@/tasks/task7/test/performanceTest';
 
+
 import React, { useState } from 'react';
 import { BarLoader } from 'react-spinners';
+import { task13_szef_test_runner  as runTestsTask13} from '@/tasks/task13/test/test_run';
 
 
 
-const tasks = [
+export const tasks = [
   { 
     number: 1, 
     name: 'Task 1: pefroming the arighmetical oprations in the body of mathb{R} on the argument of string of the size n, n "\"in {N}"/"{0} n "\"in {[1, ... , k], k "\in"[1,..., 10^30, ... ,... <"\"infintity]}. The argument is arg_x := "phi_1 phi_2 ... phi_n" phi_i "\"in [0, 1, ..., k, ... < infinity]|mathb{N} U {0}' , assignmentDate: '2023-07-01', 
@@ -58,9 +60,50 @@ const tasks = [
     deadline: '2023-08-28', 
     solution: 'There is some solution inside of the task folder' 
   },
+  { 
+    number: 8, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
+  },
+  { 
+    number: 9, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
+  },
+  { 
+    number: 10, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
+  },
+  { 
+    number: 11, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
+  },
+  { 
+    number: 12, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
+  },
+  { 
+    number: 13, 
+    name: '{}', 
+    assignmentDate: '2023-08-21', 
+    deadline: '2023-08-28', 
+    solution: 'There is some solution inside of the task folder' 
+  },
 
-  // TASK_3, ..., TASK_N
-  
+   
 ];
 
 function replacer(key, value) {
@@ -81,6 +124,7 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
   const [testResults5, setTestResults5] = useState([]);
   const [testResults6, setTestResults6] = useState([]);
   const [testResults7, setTestResults7] = useState([]);
+  const [testResults13, setTestResults13] = useState([]);
   const [filterStep, setFilterStep] = useState(1);
 
 
@@ -113,6 +157,11 @@ const TableComponent = ({ showSolution, showNotes, toggleSolutionVisibility, tog
       testResults = runTestsTask7();
       setTestResults7(testResults);
     }
+    else if (taskNumber === 13){
+      testResults = runTestsTask13();
+      setTestResults13(testResults);
+    }
+    
     
     setLoading(false);
   };
@@ -478,6 +527,38 @@ function exportCSVFile(items, fileName = 'data') {
                   </td>
               </tr>
                 )}
+
+        {task.number === 13 && testResults13.length > 0 && (
+          <tr>
+            <td colSpan={6}>
+              <div>
+                <strong>Test Results for Task {task.number}:</strong>
+              </div>
+              <ul className="test-results-list text-left text-sm">
+                {testResults13.map((result, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={`border-b border-gray-300 pb-2 mb-2 ${result.success ? 'bg-green-200' : 'bg-red-200'}`}
+                    >
+                      <strong>Test Number:</strong> {result.testNumber}
+                      <br />
+                      <strong>Test Name:</strong> {result.testName}
+                      <br />
+                      <strong>Success:</strong> {result.success ? 'Yes' : 'No'}
+                      <br />
+                      <strong>Error:</strong> {result.error ? result.error : 'None'}
+                      <br />
+                      <strong>Output:</strong> {JSON.stringify(result.output)}
+                      <br />
+                      <strong>Execution Time:</strong> {result.executionTime} ms
+                    </li>
+                  );
+                })}
+              </ul>
+            </td>
+          </tr>
+        )}
             </>
           ))}
         </tbody>
