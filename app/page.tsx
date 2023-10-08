@@ -2,14 +2,19 @@ import Header from '@/components/Header'
 import Links from '@/components/Links'
 import Title from '@/components/Title'
 import Image from 'next/image'
+import RootLayout from './layout'
 
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <RootLayout>
+    <div className="min-h-screen p-24 flex flex-col">
       <Header />
-      <Title />
-      <Links />
-    </main>
+      <div className="flex flex-1 lg:flex-row items-center">
+        <Links />
+        <Title />
+      </div>
+    </div>
+    </RootLayout>
   )
 }
