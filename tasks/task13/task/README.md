@@ -1,39 +1,34 @@
 ## Table of Contents
 
 1. [General Task Description and Key Points](#general-task-description-and-key-points)
-   1.1. [JSON Syntax Understanding](#json-syntax-understanding)
-   1.2. [Parsing Rules](#parsing-rules)
-
+   - [JSON Syntax Understanding](#json-syntax-understanding)
+   - [Parsing Rules](#parsing-rules)
 2. [JSON Parser Implementation](#json-parser-implementation)
-   2.1. [Tokenization](#tokenization)
-      - [str_serializer Function](#str_serializer-function)
-   2.2. [Parsing](#parsing)
-      - [JSON.parse Function](#jsonparse-function)
-   2.3. [Error Handling](#error-handling)
-   2.4. [Testing](#testing)
-
+   - [Tokenization](#tokenization)
+     - [str_serializer Function](#str_serializer-function)
+   - [Parsing](#parsing)
+     - [JSON.parse Function](#jsonparse-function)
+   - [Error Handling](#error-handling)
+   - [Testing](#testing)
 3. [Documentation & Reflection](#documentation--reflection)
-   3.1. [Documentation](#documentation)
-   3.2. [Reflection](#reflection)
-
-4. [A brief implementation :: Custom JSON Polyfill](#a-brief-implementation-::-custom-json-polyfill)
-
+   - [Documentation](#documentation)
+   - [Reflection](#reflection)
+4. [Brief Implementation: Custom JSON Polyfill](#brief-implementation-custom-json-polyfill)
 5. [Usage](#usage)
-
 
 ## General task description and some points outs
 1. JSON Syntax 
-1.1. JSON syntax understanding
-1.2. Parsing Rules
+ - JSON syntax understanding
+ - Parsing Rules
 
 2. JSON parser implementation
-2.1 Tokenization
+ - Tokenization
 The `str_serializer` function is a custom serializer that takes an object or primitive type element value and converts it to a JSON-like string representation. It employs a non-recursive (iterative) approach using a custom stack data structure to handle nested objects and arrays. This helps avoid stack overflow errors, especially with deep objects. It follows specific rules for serializing different data types and handles custom replacers.
-2.2 Parsing
+ - Parsing
 The `JSON.parse` function parses a JSON-like string and converts it into a JavaScript object. It uses a `walk` function to traverse the object and handle any reviver functions if provided. It also checks the validity of the JSON string using regex and then parses it.
-2.3 Error handling
+ -  Error handling
 Error handling is implemented to catch syntax errors and other issues during JSON parsing. If the input string is not valid JSON, a `SyntaxError` is thrown.
-2.4 Testing
+ -  Testing
 
 3. Documentaiton && reflection
 3.1 Documentation
