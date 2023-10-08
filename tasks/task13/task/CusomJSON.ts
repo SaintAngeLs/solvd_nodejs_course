@@ -360,8 +360,8 @@ export const CustomJSON  = (() => {
      * Implementation for the need of the future purposes
      */
 
-    // Check if native JSON.stringify exists, if not provide a custom implementation
-    if (typeof JSON.stringify !== 'function') {
+    // Check if native JSON.stringify exists, if not provide a custom implementation  suggested in the task description
+    //if (typeof JSON.stringify !== 'function') {
         JSON.stringify = function (value: any, replacer?: any, space?: any): string {
             gap = '';
             indent = '';
@@ -386,17 +386,17 @@ export const CustomJSON  = (() => {
             // Return the serialized string using the custom serializer.
             return str_serializer('', { '': value }) || "";
         };
-    }
+   // }
 
-    // Check if native JSON.parse exists, if not provide a custom implementation.
-    if (typeof JSON.parse !== 'function') {
+    // Check if native JSON.parse exists, if not provide a custom implementation suggested in the task description.
+    //if (typeof JSON.parse !== 'function') {
         JSON.parse = function (text: string, reviver?: any): any {
             const walk = (holder: any, key: string) => {
                 const value = holder[key];
 
                 // Recurse into the object if it's an object
                 if (value && typeof value === 'object') {
-                    for (const k in value) {
+                    for (const k in value) { suggested in the task description
                         if (Object.prototype.hasOwnProperty.call(value, k)) {
                             const v = walk(value, k);
                             if (v !== undefined) {
@@ -426,7 +426,7 @@ export const CustomJSON  = (() => {
 
             throw new SyntaxError('JSON.parse');
         };
-    }
+    //}
 
     // Return the JSON methods.
     return {
