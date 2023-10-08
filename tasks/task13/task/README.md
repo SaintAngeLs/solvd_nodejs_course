@@ -13,29 +13,50 @@
 3. [Documentation & Reflection](#documentation--reflection)
    - [Documentation](#documentation)
    - [Reflection](#reflection)
-4. [Brief Implementation: Custom JSON Polyfill](#brief-implementation-custom-json-polyfill)
+4. [A brief Implementation: Custom JSON Polyfill](#a-brief-implementation:-custom-json-polyfill)
 5. [Usage](#usage)
 
-## General task description and some points outs
+### General Task Description and Key Points
 1. JSON Syntax 
  - JSON syntax understanding
  - Parsing Rules
 
-2. JSON parser implementation
- - Tokenization
+### JSON Parser Implementation
+### Tokenization
 The `str_serializer` function is a custom serializer that takes an object or primitive type element value and converts it to a JSON-like string representation. It employs a non-recursive (iterative) approach using a custom stack data structure to handle nested objects and arrays. This helps avoid stack overflow errors, especially with deep objects. It follows specific rules for serializing different data types and handles custom replacers.
- - Parsing
+### Parsing
 The `JSON.parse` function parses a JSON-like string and converts it into a JavaScript object. It uses a `walk` function to traverse the object and handle any reviver functions if provided. It also checks the validity of the JSON string using regex and then parses it.
- -  Error handling
+### Error handling
 Error handling is implemented to catch syntax errors and other issues during JSON parsing. If the input string is not valid JSON, a `SyntaxError` is thrown.
  -  Testing
 
-3. Documentaiton && reflection
-3.1 Documentation
-3.2 Reflection
+### Documentaiton && reflection
+The full documentaion is presented in the source file. In the process of implementing our JSON parser, one crucial aspect that stood out was the use of regular expressions (regex) to validate and parse JSON strings. This reflection explores the role of regex in JSON parsing and the challenges and benefits it brings to the implementation.
+
+### Reflection
+
+Regular expressions play a vital role in parsing JSON for several reasons:
+
+- Syntax Validation: JSON follows a strict syntax, and regular expressions are invaluable for ensuring that the input JSON string adheres to this syntax. They help identify invalid characters, incorrect nesting, and missing delimiters, allowing us to reject malformed JSON early in the parsing process.
+
+- Tokenization: In JSON parsing, it's essential to tokenize the input string into meaningful elements like strings, numbers, objects, and arrays. Regular expressions help identify and extract these tokens, simplifying the parsing process.
+
+- Escaping Characters: JSON allows certain characters to be escaped using backslashes. Regular expressions help identify and handle escaped characters correctly, ensuring that they are parsed as intended.
+
+#### Challenges Faced:
+
+While regular expressions are powerful tools, their use in JSON parsing also posed some challenges:
+
+Complexity: Crafting regular expressions for parsing complex JSON structures can become intricate. Nested arrays and objects, along with various data types, require carefully constructed regex patterns.
+
+Performance: Depending on the complexity of the regex patterns and the size of the input JSON, regex-based parsing can have performance implications. Balancing accuracy and performance is essential.
+
+Debugging: Debugging regex patterns can be challenging, especially when they become long and complex. Testing and refining these patterns were time-consuming tasks.
 
 
-# A brief implementation :: Custom JSON Polyfill
+
+
+### A brief Implementation: Custom JSON Polyfill
 
 ## Overview
 

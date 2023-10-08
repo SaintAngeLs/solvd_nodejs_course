@@ -396,7 +396,7 @@ export const CustomJSON  = (() => {
 
                 // Recurse into the object if it's an object
                 if (value && typeof value === 'object') {
-                    for (const k in value) { suggested in the task description
+                    for (const k in value) {
                         if (Object.prototype.hasOwnProperty.call(value, k)) {
                             const v = walk(value, k);
                             if (v !== undefined) {
