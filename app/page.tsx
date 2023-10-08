@@ -3,6 +3,7 @@ import Links from '@/components/Links'
 import Title from '@/components/Title'
 import Image from 'next/image'
 import RootLayout from './layout'
+import JuliaSet from '@/components/JuliaSet'
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <div className="flex flex-1 lg:flex-row items-center">
         <Links />
         <Title />
+        {/* <JuliaSet /> */}
       </div>
     </div>
     </RootLayout>
